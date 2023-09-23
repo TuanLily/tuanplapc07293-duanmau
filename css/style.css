@@ -116,6 +116,7 @@
   padding: 10px;
 }
 
+/* Slider  */
 .banner {
   min-height: 300px;
   width: 100%;
@@ -125,7 +126,9 @@
 .banner img {
   height: 300px;
 }
-
+.carousel-control-prev {
+  background-color: aqua !important;
+}
 .card {
   float: left;
   width: 32% !important;

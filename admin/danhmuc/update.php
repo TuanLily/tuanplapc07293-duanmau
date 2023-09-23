@@ -1,20 +1,27 @@
+<?php
+    if(is_array($danhmuc)){
+        extract($danhmuc);
+    }
+?>
+
 <div class="row_main">
     <div class="row_main frontiltle">
-        <h1>THÊM MỚI LOẠI HÀNG HÓA</h1>
+        <h1>CẬP NHẬT LOẠI HÀNG HÓA</h1>
     </div>
     <div class="row_main form_content">
-        <form action="index.php?act=adddm" method="post">
+        <form action="index.php?act=updatedm" method="post">
             <div class="row_main mb10">
                 Mã loại <br>
-                <input type="text" name="maloai" id="" placeholder="Mã tự động" disabled>
+                <input type="text" name="maloai" value="<?=$ma_dm?>" placeholder="Mã tự động" disabled>
             </div>
             <div class="row_main mb10">
                 Tên Loại <br>
-                <input type="text" name="tenloai" id="">
+                <input type="text" name="tenloai" value="<?=$ten_dm?>">
             </div>
 
             <div class="row_main mb10">
-                <input type="submit" name="themmoi" value="Thêm mới">
+                <input type="hidden" name="ma_dm" value="<?=$ma_dm?>">
+                <input type="submit" name="capnhat" value="Cập Nhật">
                 <input type="reset" value="Nhập lại">
                 <a href="index.php?act=listdm"><input type="button" value="Danh sách"></a>
             </div>
