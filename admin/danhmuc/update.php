@@ -1,6 +1,6 @@
 <?php
-    if(is_array($danhmuc)){
-        extract($danhmuc);
+    if(is_array($dm)){
+        extract($dm);
     }
 ?>
 
@@ -12,15 +12,15 @@
         <form action="index.php?act=updatedm" method="post">
             <div class="row_main mb10">
                 Mã loại <br>
-                <input type="text" name="maloai" value="<?=$ma_dm?>" placeholder="Mã tự động" disabled>
+                <input type="text" name="maloai" placeholder="Mã tự động" disabled>
             </div>
             <div class="row_main mb10">
                 Tên Loại <br>
-                <input type="text" name="tenloai" value="<?=$ten_dm?>">
+                <input type="text" name="tenloai" value="<?php if(isset($name)&&($name!="")) echo $name?>">
             </div>
 
             <div class="row_main mb10">
-                <input type="hidden" name="ma_dm" value="<?=$ma_dm?>">
+                <input type="hidden" name="id" value="<?php if(isset($id)&&($id>0)) echo $id?>">
                 <input type="submit" name="capnhat" value="Cập Nhật">
                 <input type="reset" value="Nhập lại">
                 <a href="index.php?act=listdm"><input type="button" value="Danh sách"></a>

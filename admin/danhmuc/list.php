@@ -1,6 +1,6 @@
 <div class="row_main">
     <div class="row_main frontiltle">
-        <h1>QUẢN LÝ HÀNG HÓA</h1>
+        <h1>QUẢN LÝ DANH MỤC</h1>
     </div>
     <div class="row_main form_content">
         <div class="row_main mb10 form_dsloai">
@@ -14,13 +14,13 @@
                 <?php
                     foreach ($listdanhmuc as $danhmuc) {
                         extract($danhmuc);
-                        $suadm = "index.php?act=suadm&ma_dm=".$ma_dm;
-                        $xoadm = "index.php?act=xoadm&ma_dm=".$ma_dm;
+                        $suadm = "index.php?act=suadm&id=".$id;
+                        $xoadm = "index.php?act=xoadm&id=".$id;
                         echo '
                         <tr>
                     <td><input type="checkbox" name="" id=""></td>
-                    <td>'.$ma_dm.'</td>
-                    <td>'.$ten_dm.'</td>
+                    <td>'.$id.'</td>
+                    <td>'.$name.'</td>
                     <td>
                         <a href="'.$suadm.'"><input type="button" value="Sửa"></a>
                         <a href="'.$xoadm.'"><input type="button" value="Xóa"></a>

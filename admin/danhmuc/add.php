@@ -1,6 +1,6 @@
 <div class="row_main">
     <div class="row_main frontiltle">
-        <h1>THÊM MỚI LOẠI HÀNG HÓA</h1>
+        <h1>THÊM MỚI DANH MỤC</h1>
     </div>
     <div class="row_main form_content">
         <form action="index.php?act=adddm" method="post">
@@ -10,7 +10,7 @@
             </div>
             <div class="row_main mb10">
                 Tên Loại <br>
-                <input type="text" name="tenloai" id="">
+                <input type="text" name="tenloai" id="" required title="Không được để trống">
             </div>
 
             <div class="row_main mb10">
@@ -27,3 +27,10 @@
     </div>
 </div>
 </div>
+
+<script>
+$(function() {
+    // Summernote
+    $('#summernote').summernote()
+})
+</script>

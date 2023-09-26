@@ -15,6 +15,12 @@
 
     <!-- css  -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- Ck editer  -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+
+    <script src="./plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -28,7 +34,7 @@
         <div class="row_main mb">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">X-Shop</a>
+                    <a class="navbar-brand" href="../">X-Shop</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
