@@ -151,6 +151,11 @@
   margin-top: 10px;
   width: 80%;
   height: 220px;
+  transition: transform 0.5s; /* Animation */
+}
+
+.img img:hover {
+  transform: scale(1.056);
 }
 
 /* Box tài khoản  */
@@ -159,9 +164,17 @@
   line-height: 150%;
 }
 
+.nutnhan {
+  text-decoration: none;
+  color: #404040;
+}
+
+.nutnhan,
 .form_tai_khoan input[type="text"],
+.form_tai_khoan input[type="email"],
 .form_tai_khoan input[type="password"],
-.form_content input[type="file"],
+.form_content input[type="email"],
+.form_content input[type="password"],
 .form_content input[type="number"],
 .form_content input[type="text"] {
   width: 100%;
@@ -174,7 +187,11 @@
   border-radius: 5px;
 }
 
+.nutnhan,
 .form_tai_khoan input[type="submit"],
+.form_tai_khoan input[type="email"],
+.form_content input[type="email"],
+.form_content input[type="password"],
 .form_content input[type="submit"],
 .form_content input[type="reset"],
 .form_content input[type="file"],
@@ -186,7 +203,10 @@
   border: 1px solid #ccc;
 }
 
+.nutnhan,
 .form_tai_khoan input[type="submit"]:hover,
+.form_content input[type="email"],
+.form_content input[type="password"],
 .form_content input[type="submit"]:hover,
 .form_content input[type="reset"]:hover,
 .form_content input[type="file"]:hover,
@@ -314,4 +334,8 @@
 .img_spct img {
   width: 40%;
   height: auto;
+}
+
+.thongbao {
+  color: rgb(188, 0, 0);
 }

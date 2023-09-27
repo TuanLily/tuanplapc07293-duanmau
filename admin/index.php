@@ -3,6 +3,7 @@
     
     include "../dao/danhmuc.php";
     include "../dao/sanpham.php";
+    include "../dao/taikhoan.php";
     include "header.php";
     
     if(isset($_GET['act'])){
@@ -127,6 +128,51 @@
             break;
             
             //Kết thúc phần hàng hóa
+
+            //Bắt đầu phần khách hàng
+
+            
+            case 'dskh':
+            $listtaikhoan = loadall_taikhoan();
+            include "taikhoan/list.php";
+            break;
+
+            case 'xoatk':
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+                delete_taikhoan($_GET['id']);                
+            }
+        
+            $listtaikhoan = loadall_taikhoan();
+            include "taikhoan/list.php";
+            break;
+
+            case 'suatk':
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+               $taikhoan = loadone_taikhoan($_GET['id']);
+            }
+            $listtaikhoan = loadall_taikhoan();
+            
+            include "taikhoan/update.php";
+            break;
+
+            case 'updatetk':
+
+            if((isset($_POST['capnhat']) && $_POST['capnhat'])){
+                $id = $_POST['id'];
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                $email = $_POST['email'];
+                $address = $_POST['address'];
+                $tel = $_POST['tel'];
+
+                capnhat_taikhoan($id, $user, $pass, $email, $address, $tel);
+                $alert = "Cập nhật thành công";
+
+            }
+            $listtaikhoan = loadall_taikhoan();
+            include 'taikhoan/list.php';
+            break;
+            //Kết thúc phần khách hàng
             
             
 

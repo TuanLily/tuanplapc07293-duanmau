@@ -50,7 +50,7 @@
                     <td>'.$luotxem.'</td>
                     <td>
                         <a href="'.$suasp.'"><input type="button" value="Sửa"></a>
-                        <a href="'.$xoasp.'"><input type="button" value="Xóa"></a>
+                        <a href="'.$xoasp.'"><input type="button" value="Xóa" onClick="return confirm("Bạn có chắc muốn xóa không?")"></a>
                     </td>
                     </tr>
                 ';

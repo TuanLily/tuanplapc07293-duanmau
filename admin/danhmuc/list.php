@@ -23,7 +23,7 @@
                     <td>'.$name.'</td>
                     <td>
                         <a href="'.$suadm.'"><input type="button" value="Sửa"></a>
-                        <a href="'.$xoadm.'"><input type="button" value="Xóa"></a>
+                        <a href="'.$xoadm.'"><input type="button" value="Xóa" onsubmit="return confirm("Bạn có chắc muốn xóa không?")></a>
                     </td>
                     </tr>
                 ';

@@ -1,7 +1,33 @@
 <div class="row_main mb">
     <div class="box-title">Tài Khoản</div>
     <div class="box-content form_tai_khoan">
-        <form action="#" method="post">
+        <?php
+            if(isset($_SESSION['user'])){
+                extract($_SESSION['user']);
+        ?>
+        <div class="row_main mb10">
+            Tài khoản: <strong style="font-size:18px;"><?= $user ?></strong>
+        </div>
+        <div class="row_main mb10">
+            <?php if($role == 1 ){?>
+            <li>
+                <a href="admin/index.php">Đăng nhập admin</a>
+            </li>
+            <?php } ?>
+            <li>
+                <a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a>
+            </li>
+            <li>
+                <a href="index.php?act=quenmk">Quên mật khẩu?</a>
+            </li>
+            <li>
+                <a href="index.php?act=thoat">Đăng xuất</a>
+            </li>
+        </div>
+        <?php        
+            }else{
+        ?>
+        <form action=" index.php?act=dangnhap" method="post">
             <div class="row_main mb10">
                 Tên đăng nhập <br>
                 <input type="text" name="user" id="">
@@ -14,11 +40,21 @@
                 <input type="checkbox" name="" id=""> Ghi nhớ tài khoản?
             </div>
             <div class="row_main mb10">
-                <input type="submit" value="Đăng nhập">
+                <input type="submit" value="Đăng nhập" name="dangnhap">
             </div>
         </form>
+        <h6 class="thongbao">
+            <?php
+                
+                if(isset($tb)&&($tb!="")){
+                    echo $tb;
+                }
+
+            ?>
+        </h6>
         <li><a href="#">Quên mật khẩu</a></li>
-        <li><a href="#">Đăng ký thành viên</a></li>
+        <li><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
+        <?php }?>
     </div>
 </div>
 
@@ -41,8 +77,9 @@
         </ul>
     </div>
     <div class="box-footer search_box">
-        <form action="#" method="post">
-            <input type="text" placeholder="Tìm kiếm sản phẩm tại đây">
+        <form action="index.php?act=sanpham" method="post">
+            <input type="text" placeholder="Tìm kiếm sản phẩm tại đây" name="keyw">
+            <input type="submit" value="Tìm kiếm" name="timkiem">
         </form>
     </div>
 </div>

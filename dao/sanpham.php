@@ -82,10 +82,14 @@
      * @return array
      */
     function load_ten_danhmuc($iddm){
-        $sql = "select * from danhmuc where id=".$iddm;
-        $dm = pdo_query_one($sql);
-        extract($dm);
-        return $name;
+        if($iddm>0){
+            $sql = "select * from danhmuc where id=".$iddm;
+            $dm = pdo_query_one($sql);
+            extract($dm);
+            return $name;
+        }else{
+            return "";
+        }
     }
 
     /**
