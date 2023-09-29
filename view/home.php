@@ -56,12 +56,20 @@
                             <a href="'.$linksp.'" class="btn btn-light">'.$price.'$</a>
                             <p class="card-text">'.$mota.'</p>
                         </div>
+                        <form action="index.php?act=addtocart" method="post">
+                            <input type="hidden" name="id" value="'.$id.'">
+                            <input type="hidden" name="name" value="'.$name.'">
+                            <input type="hidden" name="img" value="'.$img.'">
+                            <input type="hidden" name="price" value="'.$price.'">
+                            <input type="submit" name="addtocart" value="Thêm giỏ hàng">
+                        </form>
                     </div>
                     ';
                     $i += 1;
                 }
             ?>
         </div>
+
     </div>
     <div class="box-right">
         <?php include 'pages/aside.php';?>

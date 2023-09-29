@@ -158,6 +158,11 @@
   transform: scale(1.056);
 }
 
+.navbar-brand:hover,
+.nav-item > .nav-link:hover {
+  color: white !important;
+}
+
 /* Box tài khoản  */
 
 .form_tai_khoan {
@@ -307,20 +312,20 @@
 .form_content {
   padding: 20px 0px;
 }
-
+.cart table,
 .form_dsloai table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
   border: 1px solid #999;
 }
-
+.cart table th,
 .form_dsloai table th {
   padding: 20px;
   background-color: aquamarine;
   color: rgb(36, 109, 85);
 }
-
+.cart table td,
 .form_dsloai table td {
   padding: 10px 20px;
   border: 1px solid #999;
@@ -338,4 +343,18 @@
 
 .thongbao {
   color: rgb(188, 0, 0);
+}
+
+.binhluan table {
+  width: 100%;
+}
+
+.binhluan table td:nth-child(1) {
+  width: 50%;
+}
+.binhluan table td:nth-child(2) {
+  width: 20%;
+}
+.binhluan table td:nth-child(3) {
+  width: 30%;
 }

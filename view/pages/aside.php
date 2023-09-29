@@ -15,6 +15,9 @@
             </li>
             <?php } ?>
             <li>
+                <a href="index.php?act=addtocart">Giỏ hàng</a>
+            </li>
+            <li>
                 <a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a>
             </li>
             <li>
@@ -78,7 +81,7 @@
     </div>
     <div class="box-footer search_box">
         <form action="index.php?act=sanpham" method="post">
-            <input type="text" placeholder="Tìm kiếm sản phẩm tại đây" name="keyw">
+            <input type="text" placeholder="Tìm kiếm sản phẩm tại đây" name="keyw" class="mb10">
             <input type="submit" value="Tìm kiếm" name="timkiem">
         </form>
     </div>

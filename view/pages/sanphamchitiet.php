@@ -12,12 +12,20 @@
                 ?>
             </div>
         </div>
-        <div class="row_main mb">
-            <div class="box-title">Bình luận</div>
-            <div class="row_main box-content">
+        <!-- Jquery 3.5.1  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <!-- Js load bình luận  -->
+        <script>
+        $(document).ready(function() {
 
-            </div>
-        </div>
+            $("#binhluan").load("view/pages/binhluan/binhluanform.php", {
+                idpro: <?=$id?>
+            });
+
+        });
+        </script>
+
+        <div class="row_main" id="binhluan"></div>
 
         <div class="row_main mb">
             <div class="box-title">Sản phẩm liên quan</div>

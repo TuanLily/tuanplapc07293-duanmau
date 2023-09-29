@@ -4,6 +4,7 @@
     include "../dao/danhmuc.php";
     include "../dao/sanpham.php";
     include "../dao/taikhoan.php";
+    include "../dao/binhluan.php";
     include "header.php";
     
     if(isset($_GET['act'])){
@@ -130,8 +131,7 @@
             //Kết thúc phần hàng hóa
 
             //Bắt đầu phần khách hàng
-
-            
+ 
             case 'dskh':
             $listtaikhoan = loadall_taikhoan();
             include "taikhoan/list.php";
@@ -172,7 +172,25 @@
             $listtaikhoan = loadall_taikhoan();
             include 'taikhoan/list.php';
             break;
+            
             //Kết thúc phần khách hàng
+            case 'dsbl':
+            $listbinhluan = loadall_binhluan(0);
+            include "binhluan/list.php";
+            break;
+
+            case 'xoabl':
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+                delete_binhluan($_GET['id']);            
+            }
+        
+            $listbinhluan = loadall_binhluan(0);
+            include "binhluan/list.php";
+            break;
+            //Bắt đầu phần bình luận
+
+            
+            //Kết thúc phần bình luận
             
             
 

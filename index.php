@@ -6,6 +6,10 @@
     include 'dao/sanpham.php';
     include 'dao/taikhoan.php';
     include 'global.php';
+
+    if(!isset($_SESSION['mycart'])){
+        $_SESSION['mycart'] = [];
+    }
     
     $sanphamnew = loadall_sanpham_home();
     $dsdm = loadall_danhmuc();
@@ -64,7 +68,7 @@
                 $thongbao = "Bạn đã đăng ký thành công, vui lòng đăng nhập để có thể sử dụng các dịch vụ của shop!";
             }
 
-            include 'view/taikhoan/dangky.php';
+            include 'view/pages/taikhoan/dangky.php';
             break;
 
             case 'dangnhap':
@@ -82,7 +86,7 @@
                 }
             }
 
-            include 'view/taikhoan/dangky.php';
+            include 'view/home.php';
             break;
 
             case 'edit_taikhoan':
@@ -101,7 +105,7 @@
 
             }
 
-            include 'view/taikhoan/edit_taikhoan.php';
+            include 'view/pages/taikhoan/edit_taikhoan.php';
             break;
 
             case 'quenmk':
@@ -117,7 +121,7 @@
                 }
             }
 
-            include 'view/taikhoan/quenmatkhau.php';
+            include 'view/pages/taikhoan/quenmatkhau.php';
             break;
 
             case 'thoat':
@@ -125,6 +129,28 @@
             header('location: index.php');
 
             break;
+
+            //Bắt đầu phần giỏ hàng / thanh toán
+
+            case 'addtocart':
+            if((isset($_POST['addtocart']) && $_POST['addtocart'])){
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $img = $_POST['img'];
+                $price = $_POST['price'];
+                $soluong = 1;
+                $thanhtien = $price * $soluong;
+                $spadd = [$id, $name, $img, $price, $soluong, $thanhtien];
+                array_push($_SESSION['mycart'], $spadd);
+                
+            }
+
+                include('view/pages/cart/viewcart.php');
+
+                break;
+    
+            //Kết thúc phần giỏ hàng / thanh toán
+
             
             default:
                 include 'view/home.php';
