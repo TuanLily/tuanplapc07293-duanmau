@@ -15,6 +15,10 @@
                         <input type="text" name="user" value="<?=$user?>">
                     </div>
                     <div class="row_main mb10">
+                        Họ Và Tên: <br>
+                        <input type="text" name="name" value="<?=$name?>">
+                    </div>
+                    <div class="row_main mb10">
                         Email: <br>
                         <input type="email" name="email" value="<?=$email?>">
                     </div>

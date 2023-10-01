@@ -53,7 +53,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">'.$name.'</h5>
-                            <a href="'.$linksp.'" class="btn btn-light">'.$price.'$</a>
+                            <a href="'.$linksp.'" class="btn btn-light">$'.$price.'</a>
                             <p class="card-text">'.$mota.'</p>
                         </div>
                         <form action="index.php?act=addtocart" method="post">

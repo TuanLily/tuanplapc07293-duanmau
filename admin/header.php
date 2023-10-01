@@ -47,16 +47,19 @@
                                 <a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?act=adddm">Danh Mục</a>
+                                <a class="nav-link" href="index.php?act=listdm">Danh Mục</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?act=addsp">Sản Phẩm</a>
+                                <a class="nav-link" href="index.php?act=listsp">Sản Phẩm</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?act=dskh">Khách Hàng</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?act=dsbl">Bình Luận</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?act=listbill">Đơn Hàng</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?act=thongke">Thống kê</a>

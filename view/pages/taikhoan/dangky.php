@@ -10,6 +10,10 @@
                         <input type="text" name="user" required>
                     </div>
                     <div class="row_main mb10">
+                        Họ Và Tên: <br>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="row_main mb10">
                         Email: <br>
                         <input type="email" name="email" required>
                     </div>

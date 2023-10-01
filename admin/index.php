@@ -5,6 +5,7 @@
     include "../dao/sanpham.php";
     include "../dao/taikhoan.php";
     include "../dao/binhluan.php";
+    include "../dao/cart.php";
     include "header.php";
     
     if(isset($_GET['act'])){
@@ -160,12 +161,13 @@
             if((isset($_POST['capnhat']) && $_POST['capnhat'])){
                 $id = $_POST['id'];
                 $user = $_POST['user'];
+                $name = $_POST['name'];
                 $pass = $_POST['pass'];
                 $email = $_POST['email'];
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
 
-                capnhat_taikhoan($id, $user, $pass, $email, $address, $tel);
+                capnhat_taikhoan($id, $user, $name, $pass, $email, $address, $tel);
                 $alert = "Cập nhật thành công";
 
             }
@@ -174,6 +176,8 @@
             break;
             
             //Kết thúc phần khách hàng
+            
+            //Bắt đầu phần bình luận
             case 'dsbl':
             $listbinhluan = loadall_binhluan(0);
             include "binhluan/list.php";
@@ -187,10 +191,27 @@
             $listbinhluan = loadall_binhluan(0);
             include "binhluan/list.php";
             break;
-            //Bắt đầu phần bình luận
-
-            
             //Kết thúc phần bình luận
+
+            //Bắt đầu phần đơn hàng
+            case 'listbill':
+            if(isset($_POST['keyw'])&&($_POST['keyw']!="")){
+                $keyw = $_POST['keyw'];
+            }else{
+                $keyw ="";
+            }
+            $listbill = loadall_bill($keyw, 0);
+            include "bill/list.php";
+            break;
+
+            case 'xoabill':
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+                delete_bill($_GET['id']);            
+            }
+            $listbill = loadall_bill($keyw, 0);
+            include "bill/list.php";
+            break;
+            //Kết thúc phần đơn hàng
             
             
 

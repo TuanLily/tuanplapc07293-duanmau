@@ -5,6 +5,7 @@
     include 'dao/danhmuc.php';
     include 'dao/sanpham.php';
     include 'dao/taikhoan.php';
+    include 'dao/cart.php';
     include 'global.php';
 
     if(!isset($_SESSION['mycart'])){
@@ -63,8 +64,9 @@
             if((isset($_POST['dangky']) && $_POST['dangky'])){
                 $email = $_POST['email'];
                 $user = $_POST['user'];
+                $name = $_POST['name'];
                 $pass = $_POST['pass'];
-                insert_taikhoan($email,$user,$pass);
+                insert_taikhoan($email,$user,$name,$pass);
                 $thongbao = "Bạn đã đăng ký thành công, vui lòng đăng nhập để có thể sử dụng các dịch vụ của shop!";
             }
 
@@ -94,12 +96,13 @@
             if((isset($_POST['capnhat']) && $_POST['capnhat'])){
                 $id = $_POST['id'];
                 $user = $_POST['user'];
+                $name = $_POST['name'];
                 $pass = $_POST['pass'];
                 $email = $_POST['email'];
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
 
-                capnhat_taikhoan($id, $user, $pass, $email, $address, $tel);
+                capnhat_taikhoan($id, $user, $name, $pass, $email, $address, $tel);
                 $_SESSION['user'] = check_user($user, $pass);
                 header('location: index.php?act=edit_taikhoan');
 
@@ -132,6 +135,10 @@
 
             //Bắt đầu phần giỏ hàng / thanh toán
 
+            case 'viewcart':
+                include 'view/pages/cart/viewcart.php';
+                break;
+
             case 'addtocart':
             if((isset($_POST['addtocart']) && $_POST['addtocart'])){
                 $id = $_POST['id'];
@@ -145,10 +152,59 @@
                 
             }
 
-                include('view/pages/cart/viewcart.php');
+                include 'view/pages/cart/viewcart.php';
 
                 break;
-    
+
+            case 'delcart':
+                if(isset($_GET['idcart'])){
+                    array_splice($_SESSION['mycart'],$_GET['idcart'],1);
+                }else{
+                    $_SESSION['mycart'] = []; 
+                }
+                header('location: index.php?act=viewcart');
+            break;    
+            
+            case 'bill':
+                include 'view/pages/cart/bill.php';
+                break;
+
+            case 'billconfirm':
+                if(isset($_POST['dongydathang'])&&($_POST['dongydathang'])){
+                    if(isset($_SESSION['user'])){
+                        $iduser = $_SESSION['user']['id'];
+                    }else{
+                        $id = 0;
+                    }
+                    $name = $_POST['name'];
+                    $email = $_POST['email'];
+                    $address = $_POST['address'];
+                    $tel = $_POST['tel'];
+                    $pttt = $_POST['pttt'];
+                    $ngaydathang = date('h:i:s d/m/Y');
+                    $tongdonhang = tongdonhang();
+                    //Tạo bill
+                    $idbill = insert_bill($iduser,$name,$email,$address,$tel,$pttt,$ngaydathang,$tongdonhang);
+                    //insert into cart với &_SESSiON['mycart'] với $idbill
+
+                    foreach ($_SESSION['mycart'] as $cart) {
+                        insert_cart($_SESSION['user']['id'],$cart[0],$cart[2],$cart[1],$cart[3],$cart[4],$cart[5],$idbill);
+                    }
+                    // Xóa sesion cart
+                    $_SESSION['cart'] = [];
+                    
+                    $bill = loadone_bill($idbill);
+                    $billct= loadall_cart($idbill);
+                    include 'view/pages/cart/billconfirm.php';
+                
+                }
+                    
+                break;
+
+            case 'mybill':
+                $listbill = loadall_bill($_SESSION['user']['id']);
+                include 'view/pages/cart/mybill.php';
+                break;
             //Kết thúc phần giỏ hàng / thanh toán
 
             

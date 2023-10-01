@@ -1,6 +1,6 @@
 <div class="row_main">
     <div class="row_main frontiltle">
-        <h1>DANH SÁCH TÀI KHOẢN</h1>
+        <h1>QUẢN LÝ BÌNH LUẬN</h1>
     </div>
     <div class="row_main form_content">
         <div class="row_main mb10 form_dsloai">

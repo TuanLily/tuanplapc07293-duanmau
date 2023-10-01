@@ -15,7 +15,10 @@
             </li>
             <?php } ?>
             <li>
-                <a href="index.php?act=addtocart">Giỏ hàng</a>
+                <a href="index.php?act=viewcart">Giỏ hàng</a>
+            </li>
+            <li>
+                <a href="index.php?act=mybill">Đơn hàng của tôi</a>
             </li>
             <li>
                 <a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a>

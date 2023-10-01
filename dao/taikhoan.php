@@ -4,8 +4,8 @@
      * @param mixed $tenloai
      * @return void
      */
-    function insert_taikhoan($email, $user, $pass){
-        $sql = "insert into taikhoan(email, user, pass) values('$email', '$user', '$pass')";
+    function insert_taikhoan($email, $user, $name, $pass){
+        $sql = "insert into taikhoan(email, user, name, pass) values('$email', '$user', '$name', '$pass')";
         pdo_execute($sql);
     }
 
@@ -32,9 +32,9 @@
      * @param mixed $tel
      * @return void
      */
-    function capnhat_taikhoan($id, $user, $pass, $email, $address, $tel){
+    function capnhat_taikhoan($id, $user, $name, $pass, $email, $address, $tel){
         
-        $sql = "update taikhoan set user = '".$user."', pass ='".$pass."', email = '".$email."', address = '".$address."', tel = '".$tel."' where id=".$id;
+        $sql = "update taikhoan set user = '".$name."', name = '".$user."', pass ='".$pass."', email = '".$email."', address = '".$address."', tel = '".$tel."' where id=".$id;
         pdo_execute($sql);
     }
 

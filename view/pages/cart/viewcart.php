@@ -16,34 +16,8 @@
                     </tr>
 
                     <?php
-                    $tong = 0;
-                    foreach ($_SESSION['mycart'] as $cart) {
-                        $hinh = $img_path.$cart[2];
-                        $thanhtien = $cart[3]*$cart[4];
-                        $gia = $cart[3];
-                        $tong += $thanhtien;
-                        echo '
-                           <tr> 
-                            <td><img src="'.$hinh.'" alt="" height="80px"></td>
-                            <td>'.$cart[1].'</td>
-                            <td>$'.number_format($gia,0,",",".").'</td>
-                            <td>'.$cart[4].'</td>
-                            <td>$'.number_format($thanhtien,0,",",".").'</td>
-                            <td>
-                                <a href=""><input type="button" value="Sửa" style="margin-bottom:5px;")"></a>
-                                <a href=""><input type="button" value="Xóa")"></a>
-                            </td>
-                            
-                           </tr> 
-                        ';
-                    }
-                    echo '
-                    <td colspan="5">Tổng đơn hàng</td>
-                    
-                    <td>$'.number_format($tong,0,",",".").'</td>
-
-                ';
-                ?>
+                    viewcart();
+                    ?>
                     <!-- <tr>
                         <td>1</td>
                         <td><img src="view/images/6e11af3517edff2ff1aeca18a5a8b9d5.jpg" alt="" height="80px"></td>
@@ -61,7 +35,7 @@
             <a href="index.php">
                 <input type="button" value="Trở Về">
             </a>
-            <input type="submit" value="Đặt hàng">
+            <a href="index.php?act=bill"><input type="button" value="Đặt hàng"></a>
             <a href="index.php?act=delcart">
                 <input type="button" value="Xóa Giỏ Hàng">
             </a>
