@@ -1,8 +1,6 @@
 <!-- Main Content  -->
 <div class="row_main mb ">
     <div class="box-left mr ">
-
-
         <div class="row_main mb">
             <div class="box-title">ĐƠN HÀNG CỦA BẠN</div>
             <div class="row_main box-content cart">
@@ -15,18 +13,18 @@
                         <th>TRẠNG THÁI ĐƠN HÀNG</th>
                     </tr>
                     <?php
-                    if(is_array($listbill)){
+                    if (is_array($listbill)) {
                         foreach ($listbill as $bill) {
-                           extract($bill);
-                           $ttdh = get_ttdh($bill['bill_status']);
-                           $countsp = loadall_cart_count($bill['id']);
-                           echo'
+                            extract($bill);
+                            $ttdh = get_ttdh($bill['bill_status']);
+                            $countsp = loadall_cart_count($bill['id']);
+                            echo '
                                 <tr>
-                                        <td>MDH-'.$bill['id'].'</td>
-                                        <td>'.$bill['ngaydathang'].'</td>
-                                        <td>'.$countsp.'</td>
-                                        <td>$'.number_format($bill['total'],0,',','.').'</td>
-                                        <td>'.$ttdh.'</td>
+                                        <td>MDH-' . $bill['id'] . '</td>
+                                        <td>' . $bill['ngaydathang'] . '</td>
+                                        <td>' . $countsp . '</td>
+                                        <td>$' . number_format($bill['total'], 0, ',', '.') . '</td>
+                                        <td>' . $ttdh . '</td>
                                 </tr>
                            ';
                         }

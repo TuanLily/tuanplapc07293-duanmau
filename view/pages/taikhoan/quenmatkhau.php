@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="row_main mb10">
-                        <input type="submit" value="Lấy mật khẩu" name="goiemail">
+                        <input type="submit" value="Xác nhận" name="goiemail">
                         <a class="nutnhan" href="index.php?act=dangnhap">Đăng Nhập</a>
                     </div>
 

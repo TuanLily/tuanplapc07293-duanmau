@@ -13,6 +13,7 @@
                 <tr>
                     <th></th>
                     <th>MÃ ĐƠN HÀNG</th>
+                    <th>MÃ Khách Hàng</th>
                     <th>THÔNG TIN KHÁCH HÀNG</th>
                     <th>SỐ LƯỢNG HÀNG</th>
                     <th>TỔNG GIÁ TRỊ ĐƠN HÀNG</th>
@@ -21,32 +22,33 @@
                     <th>CHỨC NĂNG</th>
                 </tr>
                 <?php
-                    foreach ($listbill as $bill) {
-                        extract($bill);
-                        $infor_kh = '
-                                        '.$bill["bill_name"].'
-                                    <br>'.$bill["bill_email"].'
-                                    <br>'.$bill["bill_address"].'
-                                    <br>'.$bill["bill_tel"];
-                        $countsp = loadall_cart_count($bill["id"]);
-                        $ttdh = get_ttdh($bill['bill_status']);
-                        $xoabill = "index.php?act=xoabill&id=".$id;
-                        echo'
+                foreach ($listbill as $bill) {
+                    extract($bill);
+                    $infor_kh = '
+                                        ' . $bill["bill_name"] . '
+                                    <br>' . $bill["bill_email"] . '
+                                    <br>' . $bill["bill_address"] . '
+                                    <br>' . $bill["bill_tel"];
+                    $countsp = loadall_cart_count($bill['id']);
+                    $ttdh = get_ttdh($bill['bill_status']);
+                    $xoabill = "index.php?act=xoabill&id=" . $id;
+                    echo '
                         <tr>
                             <td><input type="checkbox" name="" id=""></td>
-                            <td>MDH-'.$bill['id'].'</td>
-                            <td>'.$infor_kh.'</td>
-                            <td>'.$countsp.'</td>
-                            <td><strong>$'.number_format($bill['total'],0,',','.').'</strong></td>
-                            <td>'.$ttdh.'</td>
-                            <td>'.$bill['ngaydathang'].'</td>
+                            <td>MDH-' . $bill['id'] . '</td>
+                            <td>KH-' . $bill['iduser'] . '</td>
+                            <td>' . $infor_kh . '</td>
+                            <td>' . $countsp . '</td>
+                            <td><strong>$' . number_format($bill['total'], 0, ',', '.') . '</strong></td>
+                            <td>' . $ttdh . '</td>
+                            <td>' . $bill['ngaydathang'] . '</td>
                             <td>
                                 <a href=""><input type="button" value="Sửa"></a>
-                                <a href="'.$xoabill.'"><input type="button" value="Xóa" onClick="return confirm("Bạn có chắc muốn xóa không?")"></a>
+                                <a href="' . $xoabill . '"><input type="button" value="Xóa" onClick="return confirm("Bạn có chắc muốn xóa không?")"></a>
                             </td>
                         </tr>
                         ';
-                    }
+                }
                 ?>
 
 

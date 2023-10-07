@@ -34,44 +34,44 @@
         </div>
         <div class="row_main">
             <?php
-                $i = 0;
-                foreach ($sanphamnew as $sp){
-                    extract($sp);
-                    $linksp= "index.php?act=sanphamct&idsp=".$id;
-                    $hinh = $img_path.$img;
-                    if(($i==2) || ($i==5) || ($i==8)){
-                        $mr = "";
-                    }else{
-                        $mr="mr";
-                    }
-                    echo '
-                    <div class="card '.$mr.'">
+            $i = 0;
+            foreach ($sanphamnew as $sp) {
+                extract($sp);
+                $linksp = "index.php?act=sanphamct&idsp=" . $id;
+                $hinh = $img_path . $img;
+                if (($i == 2) || ($i == 5) || ($i == 8)) {
+                    $mr = "";
+                } else {
+                    $mr = "mr";
+                }
+                echo '
+                    <div class="card ' . $mr . '">
                         <div class="row_main img">
-                            <a href="'.$linksp.'">
-                            <img src="'.$hinh.'" class="card-img-top" alt="IMG" >
+                            <a href="' . $linksp . '">
+                            <img src="' . $hinh . '" class="card-img-top" alt="IMG" >
                             </a>                            
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">'.$name.'</h5>
-                            <a href="'.$linksp.'" class="btn btn-light">$'.$price.'</a>
-                            <p class="card-text">'.$mota.'</p>
+                            <h5 class="card-title">' . $name . '</h5>
+                            <p class="card-price">Giá: $' . number_format($price, 0, ',', '.') . '</p>
+                            <p class="card-text">' . $mota . '</p>
                         </div>
                         <form action="index.php?act=addtocart" method="post">
-                            <input type="hidden" name="id" value="'.$id.'">
-                            <input type="hidden" name="name" value="'.$name.'">
-                            <input type="hidden" name="img" value="'.$img.'">
-                            <input type="hidden" name="price" value="'.$price.'">
-                            <input type="submit" name="addtocart" value="Thêm giỏ hàng">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <input type="hidden" name="name" value="' . $name . '">
+                            <input type="hidden" name="img" value="' . $img . '">
+                            <input type="hidden" name="price" value="' . $price . '">
+                            <input type="submit" name="addtocart" class="btn btn-success add_cart" value="Thêm giỏ hàng">
                         </form>
                     </div>
                     ';
-                    $i += 1;
-                }
+                $i += 1;
+            }
             ?>
         </div>
 
     </div>
     <div class="box-right">
-        <?php include 'pages/aside.php';?>
+        <?php include 'pages/aside.php'; ?>
     </div>
 </div>

@@ -134,7 +134,7 @@
 .card {
   float: left;
   width: 32% !important;
-  min-height: 300px;
+  max-height: 500px;
   border: 1px solid #eee;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -147,6 +147,23 @@
   text-align: center;
 }
 
+.card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 50%;
+  text-overflow: ellipsis;
+}
+
+.card-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.add_cart {
+  width: 80%;
+  margin: 0px 20px 0 20px;
+  margin-bottom: 10px;
+}
 .img img {
   margin-top: 10px;
   width: 80%;
@@ -357,4 +374,31 @@
 }
 .binhluan table td:nth-child(3) {
   width: 30%;
+}
+
+#toggle_pass,
+#toggle_rpass,
+#toggle_pass_aside {
+  position: absolute;
+  margin-top: -25px;
+  right: 38%;
+  height: 1.2vw;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+  font-family: fontAwesome;
+}
+
+#toggle_pass::before,
+#toggle_rpass::before,
+#toggle_pass_aside::before {
+  content: "\f06e";
+}
+
+#toggle_pass.hide::before,
+#toggle_rpass.hide::before,
+#toggle_pass_aside.hide::before {
+  content: "\f070";
 }

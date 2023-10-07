@@ -10,19 +10,27 @@
             </div> -->
 
             <?php
-                    if(isset($bill)&&(is_array($bill))){
-                     extract($bill);
-                    }
-                ?>
+            if (isset($bill) && (is_array($bill))) {
+                extract($bill);
+            }
+            ?>
         </div>
 
         <div class="row_main mb">
             <div class="box-title">THÔNG TIN ĐƠN HÀNG</div>
             <div class="row_main box-content" style="text-align:center;">
-                <li>Mã đơn hàng: MDH-<?=$bill['id']?></li>
-                <li>Ngày đặt hàng: <?=$bill['ngaydathang']?></li>
-                <li>Tổng đơn hàng: $<?=number_format($bill['total'],0,',','.')?></li>
-                <li>Phương thức thanh toán: <?=$bill['bill_pttt']?></li>
+                <li>Mã đơn hàng: MDH-
+                    <?= $bill['id'] ?>
+                </li>
+                <li>Ngày đặt hàng:
+                    <?= $bill['ngaydathang'] ?>
+                </li>
+                <li>Tổng đơn hàng: $
+                    <?= number_format($bill['total'], 0, ',', '.') ?>
+                </li>
+                <li>Phương thức thanh toán:
+                    <?= $bill['bill_pttt'] ?>
+                </li>
             </div>
 
         </div>
@@ -33,19 +41,27 @@
                 <table>
                     <tr>
                         <td>Người đặt hàng:</td>
-                        <td><?=$bill['bill_name']?></td>
+                        <td>
+                            <?= $bill['bill_name'] ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Địa chỉ:</td>
-                        <td><?=$bill['bill_address']?></td>
+                        <td>
+                            <?= $bill['bill_address'] ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td><?=$bill['bill_email']?></td>
+                        <td>
+                            <?= $bill['bill_email'] ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Điện thoại:</td>
-                        <td><?=$bill['bill_tel']?></td>
+                        <td>
+                            <?= $bill['bill_tel'] ?>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -65,7 +81,7 @@
                         <th>Thành Tiền</th>
                     </tr>
                     <?php
-                        bill_chi_tiet($billct);
+                    bill_chi_tiet($billct);
                     ?>
 
 
@@ -73,7 +89,7 @@
             </div>
         </div>
         <div class="row_main mb">
-            <input type="submit" value="Đặt hàng">
+            <a href="index.php?act=mybill"><input type="submit" value="Xem Đơn Hàng"></a>
         </div>
     </div>
 
