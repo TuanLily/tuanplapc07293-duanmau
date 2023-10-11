@@ -1,3 +1,29 @@
+<?php
+global $connect;
+$listsp = mysqli_query($connect, "SELECT * FROM sanpham");
+
+//Tổng các bảng ghi
+$total = mysqli_num_rows($listsp);
+
+//Giới hạn hiển thị
+$limit = 9;
+
+//Tổng trang
+$total_page = ceil($total / $limit);
+
+// Lấy trang hiện tại
+$cr_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$start = ($cr_page - 1) * $limit;
+
+$listsp_limit = getProduct_limit($start, $limit);
+
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $sanphamnew = $listsp_limit;
+}
+?>
+
+
 <!-- Main Content  -->
 <div class="row_main mb ">
     <div class="box-left mr ">
@@ -52,9 +78,8 @@
                             </a>                            
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">' . $name . '</h5>
+                            <h5 class="card-title" style="text-align:center;">' . $name . '</h5>
                             <p class="card-price">Giá: $' . number_format($price, 0, ',', '.') . '</p>
-                            <p class="card-text">' . $mota . '</p>
                         </div>
                         <form action="index.php?act=addtocart" method="post">
                             <input type="hidden" name="id" value="' . $id . '">
@@ -68,6 +93,37 @@
                 $i += 1;
             }
             ?>
+        </div>
+
+        <!-- Phân trang -->
+        <div class="box">
+            <div class="first_line"></div>
+            <p>Trang</p>
+            <div class="second_line"></div>
+        </div>
+        <div class="pag">
+            <nav aria-label="Page navigation example" class="pag">
+                <ul class="pagination">
+                    <li class="page-item <?php echo (($cr_page - 1 == 0) ? 'check' : '') ?>">
+                        <a class="page-link" href="index.php?page=<?= $cr_page - 1 ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <?php for ($i = 1; $i <= $total_page; $i++): ?>
+                    <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
+                            href="index.php?page=<?= $i ?>">
+                            <?= $i ?>
+                        </a></li>
+                    <?php endfor; ?>
+                    <li class="page-item <?php echo (($cr_page == $total_page) ? 'check' : '') ?>">
+                        <a class="page-link" href="index.php?page=<?= $cr_page + 1 ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
     </div>

@@ -24,7 +24,7 @@
                     </div>
                     <div class="row_main mb10">
                         Mật khẩu: <br>
-                        <input type="text" name="pass" value="<?= $pass ?>">
+                        <input type="text" name="pass" value="<?= $pass ?>" readonly>
                     </div>
                     <div class="row_main mb10">
                         Địa chỉ: <br>
@@ -48,7 +48,7 @@
 
                 </form>
 
-                <h3 class="thongbao">
+                <h5 class="thongbao">
                     <?php
 
                     if (isset($tb) && ($tb != "")) {
@@ -56,7 +56,7 @@
                     }
 
                     ?>
-                </h3>
+                </h5>
             </div>
         </div>
     </div>

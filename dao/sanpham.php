@@ -116,11 +116,15 @@ function update_sanpham($id, $iddm, $tensp, $giasp, $mota, $hinh)
     pdo_execute($sql);
 }
 
-function RemoveSelect($del)
+
+function getProduct_limit($start, $limit)
 {
-    $sql = "DELETE FROM sanpham where id in ($del)";
-    pdo_execute($sql);
+
+    $sql = "select * from sanpham limit $start,$limit";
+    $listsanpham = pdo_query($sql);
+    return $listsanpham;
 }
+
 
 
 ?>

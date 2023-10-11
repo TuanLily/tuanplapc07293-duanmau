@@ -2,39 +2,13 @@
 <div class="row_main mb ">
     <div class="box-left mr ">
         <div class="row_main mb">
-            <div class="box-title">Đăng ký thành viên</div>
+            <div class="box-title">ĐẶT LẠI MẬT KHẨU</div>
             <div class="row_main box-content form_tai_khoan">
-                <form action="index.php?act=dangky" method="post">
+
+                <form action="index.php?act=doimk" method="post">
                     <div class="row_main mb10">
-                        Tên Tài Khoản: <br>
-                        <input type="text" name="user">
-                        <div class="thongbao">
-                            <span>
-                                <?php echo (isset($_SESSION['error']['user'])) ? $_SESSION['error']['user'] : '' ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row_main mb10">
-                        Họ Và Tên: <br>
-                        <input type="text" name="name">
-                        <div class="thongbao">
-                            <span>
-                                <?php echo (isset($_SESSION['error']['name'])) ? $_SESSION['error']['name'] : '' ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row_main mb10">
-                        Email: <br>
-                        <input type="email" name="email">
-                        <div class="thongbao">
-                            <span>
-                                <?php echo (isset($_SESSION['error']['email'])) ? $_SESSION['error']['email'] : '' ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row_main mb10">
-                        Mật khẩu: <br>
-                        <input type="password" name="pass" id="password">
+                        Mật khẩu mới: <br>
+                        <input type="password" name="pass" id="password" placeholder="Nhập mật khẩu">
                         <div id="toggle_pass" onclick="showPassword()"></div>
                         <div class="thongbao">
                             <span>
@@ -44,7 +18,7 @@
                     </div>
                     <div class="row_main mb10">
                         Xác nhận mật khẩu: <br>
-                        <input type="password" name="rpass" id="rpassword">
+                        <input type="password" name="rpass" id="rpassword" placeholder="Nhập mật khẩu xác nhận">
                         <div id="toggle_rpass" onclick="showRPassword()"></div>
                         <div class="thongbao">
                             <span>
@@ -52,14 +26,15 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="row_main mb10">
-                        <input type="submit" value="Đăng ký" name="dangky">
+                        <input type="submit" value="Xác nhận" name="doimatkhau">
                         <input type="reset" value="Nhập lại">
                     </div>
 
                 </form>
 
-                <h5 style="color:green;">
+                <h4 class="thongbao">
                     <?php
 
                     if (isset($thongbao) && ($thongbao != "")) {
@@ -67,7 +42,7 @@
                     }
 
                     ?>
-                </h5>
+                </h4>
             </div>
         </div>
     </div>

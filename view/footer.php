@@ -6,7 +6,11 @@
 <!-- Slider tools link -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
-
+<script>
+$(window).on('load', function() {
+    $(".loader").fadeOut(1000);
+    $(".content").fadeIn(1000);
+});
 </script>
 
 </body>

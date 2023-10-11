@@ -18,15 +18,7 @@
                     <?php
                     viewcart();
                     ?>
-                    <!-- <tr>
-                        <td>1</td>
-                        <td><img src="view/images/6e11af3517edff2ff1aeca18a5a8b9d5.jpg" alt="" height="80px"></td>
-                        <td>Tivi</td>
-                        <td>100000</td>
-                        <td>2</td>
-                        <td>200000</td>
-                        <td><input type="button" value="Sửa"></td>
-                    </tr> -->
+
 
                 </table>
             </div>
@@ -35,7 +27,7 @@
             <a href="index.php">
                 <input type="button" value="Trở Về">
             </a>
-            <a href="index.php?act=bill"><input type="button" value="Đặt hàng"></a>
+            <a href="index.php?act=bill"><input type="button" value="Đặt hàng" name="dathang"></a>
             <a href="index.php?act=delcart">
                 <input type="button" value="Xóa Giỏ Hàng">
             </a>

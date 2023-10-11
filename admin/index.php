@@ -1,11 +1,14 @@
 <?php
 require_once "../dao/pdo.php";
 
+include "../dao/connect.php";
 include "../dao/danhmuc.php";
 include "../dao/sanpham.php";
 include "../dao/taikhoan.php";
 include "../dao/binhluan.php";
 include "../dao/cart.php";
+include "../dao/delete_list.php";
+include "../global.php";
 include "header.php";
 
 
@@ -101,7 +104,7 @@ if (isset($_GET['act'])) {
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                 if (
                     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif" && $imageFileType != "dng"
+                    && $imageFileType != "gif" && $imageFileType != "dng" && $imageFileType != "webp"
                 ) {
                     $_SESSION['error']['hinh'] = 'Định dạng ảnh không phù hợp';
                     $uploadOk = 0;
@@ -148,15 +151,7 @@ if (isset($_GET['act'])) {
             include "sanpham/list.php";
             break;
 
-        case 'delete_list':
-            if (isset($_POST['delete'])) {
-                $arr = $_POST['check_del'];
-                $del = implode(',', $arr);
-                RemoveSelect($del);
-            }
-            $listsanpham = loadall_sanpham();
-            include "sanpham/list.php";
-            break;
+
 
         case 'suasp':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
@@ -284,6 +279,66 @@ if (isset($_GET['act'])) {
             include "home.php";
             break;
         //Kết thúc phần thống kế
+
+        case 'delete_list_sp':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_sp($del);
+            }
+            $listsanpham = loadall_sanpham();
+            include "sanpham/list.php";
+            break;
+
+        case 'delete_list_bill':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_bill($del);
+            }
+            $listbill = loadall_bill();
+            include "bill/list.php";
+            break;
+
+        case 'delete_list_bl':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_bl($del);
+            }
+            $listbinhluan = loadall_binhluan(0);
+            include "binhluan/list.php";
+            break;
+
+        case 'delete_list_dm':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_dm($del);
+            }
+            $listdanhmuc = loadall_danhmuc();
+            include "danhmuc/list.php";
+            break;
+
+        case 'delete_list_taikhoan':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_taikhoan($del);
+            }
+            $listtaikhoan = loadall_taikhoan();
+            include "taikhoan/list.php";
+            break;
+
+        case 'delete_list_tk':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_thongke($del);
+            }
+            $listthongke = loadall_thongke();
+            include "thongke/list.php";
+            break;
 
 
 

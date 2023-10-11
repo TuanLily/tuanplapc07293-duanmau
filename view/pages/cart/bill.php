@@ -6,47 +6,51 @@
                 <div class="box-title">THÔNG TIN KHÁCH HÀNG</div>
                 <div class="row_main box-content form_tai_khoan">
                     <?php
-                    if(isset($_SESSION['user'])){
+                    if (isset($_SESSION['user'])) {
                         $name = $_SESSION['user']['name'];
                         $address = $_SESSION['user']['address'];
                         $email = $_SESSION['user']['email'];
                         $tel = $_SESSION['user']['tel'];
-                    }else{
+                    } else {
                         $name = "";
                         $address = "";
                         $email = "";
                         $tel = "";
                     }
-                ?>
+                    ?>
                     <div class="row_main mb10">
                         Họ và tên: <br>
-                        <input type="text" name="name" value="<?=$name?>">
+                        <input type="text" name="name" value="<?= $name ?>">
                     </div>
                     <div class="row_main mb10">
                         Địa chỉ: <br>
-                        <input type="text" name="address" value="<?=$address?>">
+                        <input type="text" name="address" value="<?= $address ?>">
                     </div>
                     <div class="row_main mb10">
                         Email: <br>
-                        <input type="text" name="email" value="<?=$email?>">
+                        <input type="text" name="email" value="<?= $email ?>">
                     </div>
                     <div class="row_main mb10">
                         Số điện thoại: <br>
-                        <input type="text" name="tel" value="<?=$tel?>">
+                        <input type="text" name="tel" value="<?= $tel ?>">
                     </div>
 
                 </div>
         </div>
         <div class="row_main mb">
             <div class="box-title">PHƯƠNG THỨC THANH TOÁN</div>
-            <div class="row_main box-content">
+            <div class="row_main box-content3">
                 <table>
 
                     <tr>
-                        <td><input type="radio" name="pttt" value="1" checked>Trả tiền khi đặt hàng</td>
-                        <td><input type="radio" name="pttt" value="2">Chuyển khoản ngân hàng</td>
-                        <td><input type="radio" name="pttt" value="3">Thanh toán onine</td>
 
+                        <td><input type="radio" name="pttt" id="th" value="1" checked><label for="th"
+                                class="check_dots">Trả tiền khi
+                                nhận hàng</label></td>
+                        <td><input type="radio" name="pttt" id="ck" value="2" style="margin-left: 20px;"><label for="ck"
+                                class="check_dots">Chuyển khoản ngân hàng</label></td>
+                        <td><input type="radio" name="pttt" id="tt" value="3" style="margin-left: 20px;"><label for="tt"
+                                class="check_dots">Thanh toán online</label></td>
                     </tr>
 
                 </table>

@@ -5,10 +5,6 @@
             <div class="box-title" style="text-align:center; background-color:aquamarine; color:red">
                 <h2>QUÝ KHÁCH ĐÃ ĐẶT HÀNG THÀNH CÔNG!</h2>
             </div>
-            <!-- <div class="row_main box-content " style="text-align:center;">
-                <h2>Cảm ơn quý khách đã đặt hàng</h2>
-            </div> -->
-
             <?php
             if (isset($bill) && (is_array($bill))) {
                 extract($bill);

@@ -108,33 +108,44 @@ function loadone_taikhoan($id)
     return $tk;
 }
 
-/**
- * Mã hóa md5
- * @param mixed $password
- * @return string
- */
-function md5_encrypt($password)
+function update_edit_pass($email, $pass)
 {
-    return md5($password);
+    $sql = "update taikhoan set pass = '$pass' where email = '$email'";
+    pdo_execute($sql);
+
 }
 
-function get_password_hash($pass)
+function check_only_user($user)
 {
-    // Kết nối với cơ sở dữ liệu
-    $conn = mysqli_connect('localhost', 'root', 'mysql', 'duanmaufall2023');
+    $sql = "select * from taikhoan where user='" . $user . "'";
+    $tk = pdo_query_one($sql);
+    return $tk;
+}
 
-    // Thực hiện câu lệnh SQL để lấy mật khẩu được lưu trữ trong cơ sở dữ liệu
-    $sql = "SELECT password FROM taikhoan WHERE pass = '$pass'";
-    $result = mysqli_query($conn, $sql);
 
-    // Nếu có kết quả, lấy mật khẩu và trả về
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $pass_hash = $row['pass'];
-        return $pass_hash;
-    } else {
-        // Nếu không có kết quả, trả về null
-        return null;
+function login_user($user, $pass)
+{
+    // Kiểm tra xem thông tin đăng nhập hợp lệ hay không
+    if (!check_user($user, $pass)) {
+        // Thông tin đăng nhập không hợp lệ
+        return false;
     }
+
+    // Đăng nhập người dùng
+    $_SESSION["user"] = $user;
+    $_SESSION["logged_in"] = true;
+
+    // Chuyển hướng người dùng đến trang chủ
+    header("Location: index.php");
+
+    return true;
+}
+
+function getTaiKhoan_limit($start, $limit)
+{
+
+    $sql = "select * from taikhoan limit $start,$limit";
+    $tk = pdo_query($sql);
+    return $tk;
 }
 ?>

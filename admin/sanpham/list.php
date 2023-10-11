@@ -1,9 +1,36 @@
+<?php
+global $connect;
+$listsp = mysqli_query($connect, "SELECT * FROM danhmuc");
+
+
+//Tổng các bảng ghi
+$total = mysqli_num_rows($listsp);
+
+//Giới hạn hiển thị
+$limit = 3;
+
+//Tổng trang
+$total_page = ceil($total / $limit);
+
+// Lấy trang hiện tại
+$cr_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$start = ($cr_page - 1) * $limit;
+
+
+$listsp_limit = getProduct_limit($start, $limit);
+
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $listsanpham = $listsp_limit;
+}
+?>
+
 <div class="row_main">
     <div class="row_main frontiltle mb">
         <h1>QUẢN LÝ HÀNG HÓA</h1>
     </div>
 
-    <form action="index.php?act=delete_list" method="post">
+    <form action="index.php?act=delete_list_sp" method="post">
         <input type="text" name="keyw">
 
         <select name="iddm">
@@ -49,7 +76,7 @@
                     <td>' . $luotxem . '</td>
                     <td>
                         <a href="' . $suasp . '"><input type="button" value="Sửa"></a>
-                        <a href="' . $xoasp . '"><input type="button" value="Xóa" onClick="return confirm("Bạn có chắc muốn xóa không?")"></a>
+                        <a href="' . $xoasp . '" onclick="return confirm(`Bạn có chắc muốn xóa không?`)" class="btn btn-danger">Xóa</a>
                     </td>
                     </tr>
                 ';
@@ -59,12 +86,45 @@
 
                 </table>
             </div>
+
+            <!-- Phân trang -->
+            <div class="box">
+                <div class="first_line"></div>
+                <p>Trang</p>
+                <div class="second_line"></div>
+            </div>
+            <div class="pag">
+                <nav aria-label="Page navigation example" class="pag">
+                    <ul class="pagination">
+                        <li class="page-item <?php echo (($cr_page - 1 == 0) ? 'check' : '') ?>">
+                            <a class="page-link" href="index.php?act=listsp&page=<?= $cr_page - 1 ?>"
+                                aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <!-- <span class="sr-only">Previous</span> -->
+                            </a>
+                        </li>
+                        <?php for ($i = 1; $i <= $total_page; $i++): ?>
+                        <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
+                                href="index.php?act=listsp&page=<?= $i ?>">
+                                <?= $i ?>
+                            </a></li>
+                        <?php endfor; ?>
+                        <li class="page-item <?php echo (($cr_page == $total_page) ? 'check' : '') ?>">
+                            <a class="page-link" href="index.php?act=listsp&page=<?= $cr_page + 1 ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <!-- <span class="sr-only">Next</span> -->
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             <div class="row_main mb10">
                 <div class="">
-                    <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
+                    <label for="checkAll" class="btn btn-secondary chon" style="display:block;">Chọn tất cả</label>
                     <label for="checkAll" class="btn btn-warning bochon" style="display:none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
-                    <a href="index.php?act=delete_list"><input type="submit" value="Xóa mục đã chọn" name="delete"></a>
+                    <a href="index.php?act=delete_list_sp"><input type="submit" value="Xóa mục đã chọn"
+                            name="delete"></a>
                     <a href="index.php?act=addsp"><input type="button" value="Nhập thêm"></a>
                 </div>
 
@@ -73,27 +133,3 @@
     </form>
 
 </div>
-
-<script type="text/javascript">
-    var checkAll = document.querySelector('#checkAll')
-    var checkBoxes = document.querySelectorAll('.checkbox')
-    var chon = document.querySelector('.chon')
-    var bochon = document.querySelector('.bochon')
-
-    checkAll.onclick = () => {
-        checkBoxes.forEach(checkBox => {
-            if (checkAll.checked == true) {
-                checkBox.checked = true
-                chon.style.display = 'none'
-                bochon.style.display = 'block'
-            } else {
-                checkBox.checked = false;
-                chon.style.display = 'block'
-                bochon.style.display = 'none'
-            }
-        });
-
-
-
-    }
-</script>

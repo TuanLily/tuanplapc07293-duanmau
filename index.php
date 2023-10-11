@@ -1,11 +1,15 @@
 <?php
 session_start();
+ob_start();
+include_once './mail/index.php';
 include 'view/header.php';
 include 'dao/pdo.php';
+include 'dao/connect.php';
 include 'dao/danhmuc.php';
 include 'dao/sanpham.php';
 include 'dao/taikhoan.php';
 include 'dao/cart.php';
+include 'dao/delete_list.php';
 include 'global.php';
 global $conn;
 
@@ -17,7 +21,7 @@ if (!isset($_SESSION['mycart'])) {
 $sanphamnew = loadall_sanpham_home();
 $dsdm = loadall_danhmuc();
 $dstop10 = loadall_sanpham_top10();
-
+$mail = new Mailer();
 if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
     switch ($act) {
@@ -69,7 +73,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $pass = $_POST['pass'];
                 $rpass = $_POST['rpass'];
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
-                $rpass_hash = password_hash($rpass, PASSWORD_DEFAULT);
                 $checkOk = 1;
 
                 if (empty($user)) {
@@ -125,15 +128,12 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         $checkOk = 0;
                     }
                 }
-                echo $checkOk . '<br>';
-                var_dump($_SESSION['error']['rpass']);
-
-
 
                 if ($checkOk == 1) {
                     password_verify($rpass, $pass_hash);
                     insert_taikhoan($email, $user, $name, $pass_hash);
-                    $thongbao = "Bạn đã đăng ký thành công, vui lòng đăng nhập để có thể sử dụng các dịch vụ của shop!";
+                    echo '<script>alert("Đăng ký thành công, vui lòng đăng nhập")</script>';
+
                 }
             }
 
@@ -145,15 +145,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             if ((isset($_POST['dangnhap']) && $_POST['dangnhap'])) {
                 $user = $_POST['user'];
                 $pass = $_POST['pass'];
-                echo $pass . '<br>';
-                // $pass_hash = md5($pass);
 
                 $check_user_pass = check_user_validate($user);
                 $pass_check = password_verify($pass, $check_user_pass['pass']);
 
                 if ($pass_check == true) {
                     $_SESSION['user'] = $check_user_pass;
-                    $tb = "Đăng nhập thành công";
+                    echo '<script>alert("Đăng nhập thành công")</script>';
+
                 } else {
                     $tb = "Sai tài khoản hoặc mật khẩu!";
 
@@ -179,7 +178,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 // Kiểm tra số điện thoại
                 $regex = '/^[0-9]{10}$/';
                 $check_tel = preg_match($regex, $tel);
-                var_dump($check_tel);
                 if ($check_tel == 0) {
                     $_SESSION['error']['tel'] = "Số điện thoại không hợp lệ";
                 }
@@ -187,35 +185,96 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
                     $update_tk = capnhat_taikhoan($id, $user, $name, $pass, $email, $address, $tel);
                     $_SESSION['user'] = check_user($user, $pass);
-                    if ($update_tk == 1) {
-                        $tb = "Cập nhật thành công";
-                    } else {
-                        $tb = "Cập nhật thất bại";
+                    echo '<script>alert("Cập nhật thành công")</script>';
+                    if ($update_tk == 0) {
+                        echo '<script>alert("Cập nhật thất bại")</script>';
                     }
                 }
-
-
-                // header('location: index.php?act=edit_taikhoan');
-
             }
             include 'view/pages/taikhoan/edit_taikhoan.php';
             break;
 
+        case 'doimk':
+            if ((isset($_POST['doimatkhau']) && $_POST['doimatkhau'])) {
+                $err = array();
+                $pass = $_POST['pass'];
+                $rpass = $_POST['rpass'];
+                $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+                $checkOk = 1;
+
+
+                if (empty($pass)) {
+                    $_SESSION['error']['pass'] = 'Không được để trống';
+                    $checkOk = 0;
+                } else if (strlen($pass) < 4) {
+                    $_SESSION['error']['pass'] = 'Mật khẩu phải có ít nhất 4 ký tự';
+                    $checkOk = 0;
+                } else {
+                    // Lưu trữ mật khẩu đã được mã hóa hash()
+                    $pass_hash;
+                }
+
+                if (empty($rpass)) {
+                    $_SESSION['error']['rpass'] = 'Không được để trống';
+                    $checkOk = 0;
+                } else {
+                    // Sử dụng hàm password_verify() để kiểm tra mật khẩu xác nhận
+                    if (!password_verify($rpass, $pass_hash)) {
+                        $_SESSION['error']['rpass'] = 'Mật khẩu không trùng khớp';
+                        $checkOk = 0;
+                    }
+                }
+
+                if ($checkOk == 1) {
+                    password_verify($rpass, $pass_hash);
+                    update_edit_pass($_SESSION['email'], $pass_hash);
+                    // $thongbao = "YEs";
+                    echo '<script>alert("Mật khẩu đã được đổi")</script>';
+                }
+            }
+            include 'view/pages/taikhoan/doimatkhau.php';
+            break;
+
+
         case 'quenmk':
 
             if ((isset($_POST['goiemail']) && $_POST['goiemail'])) {
-
+                $err = array();
                 $email = $_POST['email'];
-                $check_email = check_email($email);
-                if (is_array($check_email)) {
-                    $thongbao = "Mật khẩu của bạn là: " . $check_email['email'] . "";
-                } else {
-                    $thongbao = "Không có email này nên không thể cung cấp mật khẩu";
+                if ($email == '') {
+                    $_SESSION['error']['email'] = 'Không được để trống';
                 }
+                if (empty($_SESSION['error']['email'])) {
+                    $check_email = check_email($email);
+                    $code = substr(rand(0, 999999), 0, 6);
+                    $title = "Quên mật khẩu";
+                    $content = "Mã xác minh của bạn là <span style='color:tomato;'>" . $code . "</span>";
+                    $mail->sendMail($title, $content, $email);
+
+                    $_SESSION['email'] = $email;
+                    $_SESSION['code'] = $code;
+                    header('Location: index.php?act=xacminh');
+                }
+
             }
 
             include 'view/pages/taikhoan/quenmatkhau.php';
             break;
+
+        case 'xacminh':
+
+            if (isset($_POST['xacminh'])) {
+                $err = array();
+                if ($_POST['maxm'] != $_SESSION['code']) {
+                    $_SESSION['error']['maxm'] = 'Mã xác minh không hợp lệ';
+                } else {
+                    header('Location: index.php?act=doimk');
+                }
+            }
+
+            include 'view/pages/taikhoan/xacminh.php';
+            break;
+
 
         case 'thoat':
             session_unset();
@@ -280,15 +339,13 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 foreach ($_SESSION['mycart'] as $cart) {
                     insert_cart($_SESSION['user']['id'], $cart[0], $cart[2], $cart[1], $cart[3], $cart[4], $cart[5], $idbill);
                 }
-                // Xóa sesion cart
+                // Xóa session cart
                 $_SESSION['cart'] = [];
 
                 $bill = loadone_bill($idbill);
                 $billct = loadall_cart($idbill);
                 include 'view/pages/cart/billconfirm.php';
-
             }
-
             break;
 
         case 'mybill':

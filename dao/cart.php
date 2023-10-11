@@ -29,6 +29,11 @@ function viewcart()
               <td>$' . number_format($tong, 0, ",", ".") . '</td>
 
             ';
+
+    if (isset($_POST['dathang']) && ($_POST['dathang'])) {
+        $_SESSION['mycart'] = [];
+    }
+
 }
 
 function bill()
@@ -41,9 +46,10 @@ function bill()
         $thanhtien = $cart[3] * $cart[4];
         $gia = $cart[3];
         $tong += $thanhtien;
+        $i += 1;
         echo '
                 <tr> 
-                <td></td>
+                <td>' . $i . '</td>
                 <td><img src="' . $hinh . '" alt="" height="80px"></td>
                 <td>' . $cart[1] . '</td>
                 <td>$' . number_format($gia, 0, ",", ".") . '</td>
@@ -52,7 +58,7 @@ function bill()
                             
                 </tr> 
                 ';
-        $i += 1;
+
     }
     echo '
               <td colspan="5">Tổng đơn hàng</td>
@@ -189,6 +195,15 @@ function loadall_thongke()
     $sql .= " group by danhmuc.id order by danhmuc.id asc";
     $listthongke = pdo_query($sql);
     return $listthongke;
+}
+
+
+function getBill_limit($start, $limit)
+{
+
+    $sql = "select * from bill limit $start,$limit";
+    $tk = pdo_query($sql);
+    return $tk;
 }
 
 ?>
