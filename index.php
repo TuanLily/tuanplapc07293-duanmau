@@ -157,8 +157,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     $tb = "Sai tài khoản hoặc mật khẩu!";
 
                 }
-
-
             }
 
             include 'view/home.php';

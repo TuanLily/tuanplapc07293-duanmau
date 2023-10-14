@@ -120,7 +120,7 @@ function update_sanpham($id, $iddm, $tensp, $giasp, $mota, $hinh)
 function getProduct_limit($start, $limit)
 {
 
-    $sql = "select * from sanpham limit $start,$limit";
+    $sql = "select * from sanpham order by id desc limit $start,$limit ";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

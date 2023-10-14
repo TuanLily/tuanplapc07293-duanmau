@@ -32,7 +32,7 @@ function delete_binhluan($id)
 function getBinhLuan_limit($start, $limit)
 {
 
-    $sql = "select * from binhluan limit $start,$limit";
+    $sql = "select * from binhluan order by id desc limit $start,$limit";
     $tk = pdo_query($sql);
     return $tk;
 }

@@ -144,7 +144,7 @@ function login_user($user, $pass)
 function getTaiKhoan_limit($start, $limit)
 {
 
-    $sql = "select * from taikhoan limit $start,$limit";
+    $sql = "select * from taikhoan order by id desc limit $start,$limit";
     $tk = pdo_query($sql);
     return $tk;
 }

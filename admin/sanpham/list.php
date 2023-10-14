@@ -2,7 +2,6 @@
 global $connect;
 $listsp = mysqli_query($connect, "SELECT * FROM sanpham");
 
-
 //Tổng các bảng ghi
 $total = mysqli_num_rows($listsp);
 
@@ -19,6 +18,8 @@ $start = ($cr_page - 1) * $limit;
 
 
 $listsp_limit = getProduct_limit($start, $limit);
+
+
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $listsanpham = $listsp_limit;
@@ -107,10 +108,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                             </a>
                         </li>
                         <?php for ($i = 1; $i <= $total_page; $i++): ?>
-                        <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
-                                href="index.php?act=listsp&page=<?= $i ?>">
-                                <?= $i ?>
-                            </a></li>
+                            <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
+                                    href="index.php?act=listsp&page=<?= $i ?>">
+                                    <?= $i ?>
+                                </a></li>
                         <?php endfor; ?>
                         <li class="page-item <?php echo (($cr_page == $total_page) ? 'check' : '') ?>">
                             <a class="page-link" href="index.php?act=listsp&page=<?= $cr_page + 1 ?>" aria-label="Next">

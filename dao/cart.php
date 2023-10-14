@@ -241,7 +241,7 @@ function loadall_thongke()
 function getBill_limit($start, $limit)
 {
 
-    $sql = "select * from bill limit $start,$limit";
+    $sql = "select * from bill order by id desc limit $start,$limit";
     $tk = pdo_query($sql);
     return $tk;
 }
