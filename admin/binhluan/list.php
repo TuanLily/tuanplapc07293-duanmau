@@ -102,8 +102,8 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
             </div>
             <div class="row_main mb10">
                 <div class="">
-                    <label for="checkAll" class="btn btn-secondary chon" style="display:block;">Chọn tất cả</label>
-                    <label for="checkAll" class="btn btn-warning bochon" style="display:none;">Bỏ chọn</label>
+                    <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
+                    <label for="checkAll" class="btn btn-warning bochon" style="display: none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
                     <a href="index.php?act=delete_list_bl"><input type="submit" value="Xóa mục đã chọn"
                             name="delete"></a>

@@ -4,6 +4,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: "Lato", sans-serif;
   font-size: 0.7vw;
 }
@@ -41,9 +43,10 @@
 
 .header {
   background-color: #198754;
-  border: 1px solid #1da867;
+  border-top: 1px solid #1da867;
+  /* border: 1px solid #1da867; */
   color: white;
-  border-radius: var(--border-rds);
+  border-radius: 0px 0px 5px 5px;
 }
 
 .header h1 {
@@ -149,7 +152,8 @@
 .card {
   float: left;
   width: 32% !important;
-  min-height: 500px;
+  min-height: 400px;
+  max-height: 450px;
   border: 1px solid #eee;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -328,7 +332,7 @@
   background-color: #eee;
   border: 1px solid #ccc;
   color: #666;
-  border-radius: var(--border-rds);
+  border-radius: 0px 0px 5px 5px;
   padding: 0px 20px;
 }
 
@@ -440,11 +444,15 @@
 .loader {
   display: flex;
   width: 8rem;
-  height: 8rem;
+  height: auto;
   justify-content: center;
   align-items: center;
   position: relative;
   flex-direction: column;
+}
+
+.loader > div {
+  border-top-color: rgb(0, 255, 170) !important;
 }
 
 .curve {

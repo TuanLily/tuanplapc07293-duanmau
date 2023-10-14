@@ -1,13 +1,13 @@
 <?php
 global $connect;
-$listsp = mysqli_query($connect, "SELECT * FROM danhmuc");
+$listsp = mysqli_query($connect, "SELECT * FROM sanpham");
 
 
 //Tổng các bảng ghi
 $total = mysqli_num_rows($listsp);
 
 //Giới hạn hiển thị
-$limit = 3;
+$limit = 5;
 
 //Tổng trang
 $total_page = ceil($total / $limit);
@@ -30,7 +30,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
         <h1>QUẢN LÝ HÀNG HÓA</h1>
     </div>
 
-    <form action="index.php?act=delete_list_sp" method="post">
+    <form action="<?php if (isset($_POST['listcheck']) && $_POST['listcheck'])
+        echo 'index.php?act=listsp';
+    else
+        echo 'index.php?act=delete_list_sp'; ?>" method="post">
         <input type="text" name="keyw">
 
         <select name="iddm">
@@ -71,12 +74,12 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                     <td> <input type="checkbox" class="checkbox" name="check_del[]" value="' . $id . '"></td>
                     <td>' . $id . '</td>
                     <td>' . $name . '</td>
-                    <td>' . $hinhanh . '</td>
+                    <td style="width: auto; height: auto;">' . $hinhanh . '</td>
                     <td>$' . number_format($price, 0, ',', '.') . '</td>
                     <td>' . $luotxem . '</td>
                     <td>
                         <a href="' . $suasp . '"><input type="button" value="Sửa"></a>
-                        <a href="' . $xoasp . '" onclick="return confirm(`Bạn có chắc muốn xóa không?`)" class="btn btn-danger">Xóa</a>
+                        <a href="' . $xoasp . '" class="btn btn-danger">Xóa</a>
                     </td>
                     </tr>
                 ';
@@ -120,8 +123,8 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
             </div>
             <div class="row_main mb10">
                 <div class="">
-                    <label for="checkAll" class="btn btn-secondary chon" style="display:block;">Chọn tất cả</label>
-                    <label for="checkAll" class="btn btn-warning bochon" style="display:none;">Bỏ chọn</label>
+                    <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
+                    <label for="checkAll" class="btn btn-warning bochon" style="display: none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
                     <a href="index.php?act=delete_list_sp"><input type="submit" value="Xóa mục đã chọn"
                             name="delete"></a>

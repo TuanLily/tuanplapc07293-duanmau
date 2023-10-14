@@ -11,6 +11,7 @@
                         <th>SỐ LƯỢNG HÀNG</th>
                         <th>TỔNG GIÁ TRỊ ĐƠN HÀNG</th>
                         <th>TRẠNG THÁI ĐƠN HÀNG</th>
+                        <th>CHỨC NĂNG</th>
                     </tr>
                     <?php
                     if (is_array($listbill)) {
@@ -18,6 +19,7 @@
                             extract($bill);
                             $ttdh = get_ttdh($bill['bill_status']);
                             $countsp = loadall_cart_count($bill['id']);
+                            $billct = "index.php?act=billct&id=" . $bill['id'];
                             echo '
                                 <tr>
                                         <td>MDH-' . $bill['id'] . '</td>
@@ -25,6 +27,9 @@
                                         <td>' . $countsp . '</td>
                                         <td>$' . number_format($bill['total'], 0, ',', '.') . '</td>
                                         <td>' . $ttdh . '</td>
+                                        <td>                        
+                                            <a href="' . $billct . '" class="btn btn-success"><input type="button" value="Chi tiết" style="background: none; border:none; color: #fff;"></a>
+                                        </td>
                                 </tr>
                            ';
                         }

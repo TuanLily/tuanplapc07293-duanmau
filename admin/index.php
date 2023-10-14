@@ -9,6 +9,8 @@ include "../dao/binhluan.php";
 include "../dao/cart.php";
 include "../dao/delete_list.php";
 include "../global.php";
+
+
 include "header.php";
 
 
@@ -70,6 +72,15 @@ if (isset($_GET['act'])) {
             include "danhmuc/list.php";
             break;
 
+        case 'delete_list_dm':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_dm($del);
+            }
+            $listdanhmuc = loadall_danhmuc();
+            include "danhmuc/list.php";
+            break;
         //Kết thúc phần danh mục
 
         //Bắt đầu phần hàng hóa
@@ -184,6 +195,15 @@ if (isset($_GET['act'])) {
             include "sanpham/list.php";
             break;
 
+        case 'delete_list_sp':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_sp($del);
+            }
+            $listsanpham = loadall_sanpham();
+            include "sanpham/list.php";
+            break;
         //Kết thúc phần hàng hóa
 
         //Bắt đầu phần khách hàng
@@ -230,6 +250,17 @@ if (isset($_GET['act'])) {
             include 'taikhoan/list.php';
             break;
 
+
+        case 'delete_list_taikhoan':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_taikhoan($del);
+            }
+            $listtaikhoan = loadall_taikhoan();
+            include "taikhoan/list.php";
+            break;
+
         //Kết thúc phần khách hàng
 
         //Bắt đầu phần bình luận
@@ -243,6 +274,17 @@ if (isset($_GET['act'])) {
                 delete_binhluan($_GET['id']);
             }
 
+            $listbinhluan = loadall_binhluan(0);
+            include "binhluan/list.php";
+            break;
+
+
+        case 'delete_list_bl':
+            if (isset($_POST['delete'])) {
+                $arr = $_POST['check_del'];
+                $del = implode(',', $arr);
+                RemoveSelect_bl($del);
+            }
             $listbinhluan = loadall_binhluan(0);
             include "binhluan/list.php";
             break;
@@ -266,29 +308,6 @@ if (isset($_GET['act'])) {
             $listbill = loadall_bill($keyw, 0);
             include "bill/list.php";
             break;
-        //Kết thúc phần đơn hàng
-
-        //Bắt đầu phần thống kê
-        case 'thongke':
-            $listthongke = loadall_thongke();
-            include "thongke/list.php";
-            break;
-
-        case 'bieudo':
-            $listthongke = loadall_thongke();
-            include "home.php";
-            break;
-        //Kết thúc phần thống kế
-
-        case 'delete_list_sp':
-            if (isset($_POST['delete'])) {
-                $arr = $_POST['check_del'];
-                $del = implode(',', $arr);
-                RemoveSelect_sp($del);
-            }
-            $listsanpham = loadall_sanpham();
-            include "sanpham/list.php";
-            break;
 
         case 'delete_list_bill':
             if (isset($_POST['delete'])) {
@@ -300,34 +319,16 @@ if (isset($_GET['act'])) {
             include "bill/list.php";
             break;
 
-        case 'delete_list_bl':
-            if (isset($_POST['delete'])) {
-                $arr = $_POST['check_del'];
-                $del = implode(',', $arr);
-                RemoveSelect_bl($del);
-            }
-            $listbinhluan = loadall_binhluan(0);
-            include "binhluan/list.php";
-            break;
+        // case 'billct':
+        //     include "bill/billct.php";
+        //     break;
 
-        case 'delete_list_dm':
-            if (isset($_POST['delete'])) {
-                $arr = $_POST['check_del'];
-                $del = implode(',', $arr);
-                RemoveSelect_dm($del);
-            }
-            $listdanhmuc = loadall_danhmuc();
-            include "danhmuc/list.php";
-            break;
+        //Kết thúc phần đơn hàng
 
-        case 'delete_list_taikhoan':
-            if (isset($_POST['delete'])) {
-                $arr = $_POST['check_del'];
-                $del = implode(',', $arr);
-                RemoveSelect_taikhoan($del);
-            }
-            $listtaikhoan = loadall_taikhoan();
-            include "taikhoan/list.php";
+        //Bắt đầu phần thống kê
+        case 'thongke':
+            $listthongke = loadall_thongke();
+            include "thongke/list.php";
             break;
 
         case 'delete_list_tk':
@@ -340,7 +341,11 @@ if (isset($_GET['act'])) {
             include "thongke/list.php";
             break;
 
-
+        case 'bieudo':
+            $listthongke = loadall_thongke();
+            include "home.php";
+            break;
+        //Kết thúc phần thống kế
 
         default:
             include "home.php";

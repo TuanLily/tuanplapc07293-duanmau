@@ -30,7 +30,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
         <h1>QUẢN LÝ ĐƠN HÀNG</h1>
     </div>
 
-    <form action="index.php?act=delete_list_bill" method="post">
+    <form action="<?php if (isset($_POST['listcheck']) && $_POST['listcheck'])
+        echo 'index.php?act=listbill';
+    else
+        echo 'index.php?act=delete_list_bill'; ?>" method="post">
         <input type="text" name="keyw" placeholder="Nhập mã đơn hàng">
         <input type="submit" name="listcheck" value="CHỌN">
 
@@ -70,11 +73,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                             <td>' . $ttdh . '</td>
                             <td>' . $bill['ngaydathang'] . '</td>
                             <td>
-                                <a href=""><input type="button" value="Sửa"></a>
-                                <a href="' . $xoabill . '" onclick="return confirm(`Bạn có chắc muốn xóa không?`)" class="btn btn-danger">Xóa</a>
-                                </td>
-                        </tr>
-                        ';
+                                 <a href="' . $xoabill . '" class="btn btn-danger">Xóa</a>
+                            </td>
+                    </tr>
+                    ';
                     }
                     ?>
 
@@ -117,8 +119,8 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
             </div>
             <div class="row_main mb10">
                 <div class="">
-                    <label for="checkAll" class="btn btn-secondary chon" style="display:block;">Chọn tất cả</label>
-                    <label for="checkAll" class="btn btn-warning bochon" style="display:none;">Bỏ chọn</label>
+                    <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
+                    <label for="checkAll" class="btn btn-warning bochon" style="display: none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
                     <a href="index.php?act=delete_list_bill"><input type="submit" value="Xóa mục đã chọn"
                             name="delete"></a>

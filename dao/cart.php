@@ -1,21 +1,30 @@
 <?php
+
+
 function viewcart()
 {
     global $img_path;
     $tong = 0;
     $i = 0;
+
     foreach ($_SESSION['mycart'] as $cart) {
-        $hinh = $img_path . $cart[2];
-        $thanhtien = $cart[3] * $cart[4];
-        $gia = $cart[3];
+        $hinh = $img_path . $cart['img'];
+        $thanhtien = $cart['soluong'] * $cart['price'];
+        $gia = $cart['price'];
         $tong += $thanhtien;
-        $xoasp = '<a href="index.php?act=delcart&idcart=' . $i . '"><input type="button" value="Xóa"></a>                        ';
+        $xoasp = '<a href="index.php?act=delcart&idcart=' . $i . '"><input type="button" value="Xóa"></a>';
         echo '
                 <tr> 
                 <td><img src="' . $hinh . '" alt="" height="80px"></td>
-                <td>' . $cart[1] . '</td>
+                <td>' . $cart['name'] . '</td>
                 <td>$' . number_format($gia, 0, ",", ".") . '</td>
-                <td>' . $cart[4] . '</td>
+                <td>
+                     <form action="index.php?act=viewcart" method="post">
+                        <input type="number" style="text-align:center; width:50px;" name="edit_qty" value="' . $cart['soluong'] . '" onchange="this.form.submit();" min="1">
+                        <input type="hidden" name="id" value="' . $cart['id'] . '">
+                     </form>
+                </td>
+                             
                 <td>$' . number_format($thanhtien, 0, ",", ".") . '</td>
                 <td>' . $xoasp . '</td>
                             
@@ -35,6 +44,17 @@ function viewcart()
     }
 
 }
+// Hàm tăng số lượng sản phẩm giỏ hàng
+if (isset($_POST['edit_qty']) && ($_POST['edit_qty']) && isset($_POST['id'])) {
+    if (isset($_SESSION['mycart'])) {
+        $id = $_POST['id'];
+        // Trong $_SESSION['cart'] láy mảng là id mấy và láy số lượng của nó
+        $_SESSION['mycart']["$id"]['soluong'] = $_POST['edit_qty'];
+
+
+    }
+}
+
 
 function bill()
 {
@@ -42,18 +62,18 @@ function bill()
     $tong = 0;
     $i = 0;
     foreach ($_SESSION['mycart'] as $cart) {
-        $hinh = $img_path . $cart[2];
-        $thanhtien = $cart[3] * $cart[4];
-        $gia = $cart[3];
+        $hinh = $img_path . $cart['img'];
+        $thanhtien = $cart['soluong'] * $cart['price'];
+        $gia = $cart['price'];
         $tong += $thanhtien;
         $i += 1;
         echo '
                 <tr> 
                 <td>' . $i . '</td>
                 <td><img src="' . $hinh . '" alt="" height="80px"></td>
-                <td>' . $cart[1] . '</td>
+                <td>' . $cart['name'] . '</td>
                 <td>$' . number_format($gia, 0, ",", ".") . '</td>
-                <td>' . $cart[4] . '</td>
+                <td>' . $cart['soluong'] . '</td>
                 <td>$' . number_format($thanhtien, 0, ",", ".") . '</td>
                             
                 </tr> 
@@ -75,19 +95,21 @@ function bill_chi_tiet($listbill)
     $i = 0;
     foreach ($listbill as $cart) {
         $hinh = $img_path . $cart['img'];
-        $tong += $cart['thanhtien'];
+        $thanhtien = $cart['soluong'] * $cart['price'];
+        $tong += $thanhtien;
+        $i += 1;
         echo '
                 <tr> 
-                <td></td>
+                <td>' . $i . '</td>
                 <td><img src="' . $hinh . '" alt="" height="80px"></td>
                 <td>' . $cart['name'] . '</td>
                 <td>$' . number_format($cart['price'], 0, ",", ".") . '</td>
                 <td>' . $cart['soluong'] . '</td>
-                <td>$' . number_format($cart['thanhtien'], 0, ",", ".") . '</td>
+                <td>$' . number_format($thanhtien, 0, ",", ".") . '</td>
                             
                 </tr> 
                 ';
-        $i += 1;
+
     }
     echo '
             <tr>
@@ -101,7 +123,7 @@ function tongdonhang()
 {
     $tong = 0;
     foreach ($_SESSION['mycart'] as $cart) {
-        $thanhtien = $cart[3] * $cart[4];
+        $thanhtien = $cart['soluong'] * $cart['price'];
         $tong += $thanhtien;
     }
     return $tong;
@@ -175,6 +197,24 @@ function get_ttdh($n)
             break;
     }
     return $tt;
+}
+function get_pttt($n)
+{
+    switch ($n) {
+        case '1':
+            $tt = 'Thanh toán khi nhận hàng';
+            break;
+        case '2':
+            $pttt = 'Chuyển khoàn ngân hàng';
+            break;
+        case '3':
+            $pttt = 'Thanh toán online';
+            break;
+        default:
+            $pttt = 'Thanh toán khi nhận hàng';
+            break;
+    }
+    return $pttt;
 }
 
 /**

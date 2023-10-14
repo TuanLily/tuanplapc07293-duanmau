@@ -2,15 +2,13 @@
 <div class="row_main mb ">
     <div class="box-left mr ">
         <div class="row_main mb">
-            <div class="box-title" style="text-align:center; background-color:aquamarine; color:red">
-                <h2>QUÝ KHÁCH ĐÃ ĐẶT HÀNG THÀNH CÔNG!</h2>
-            </div>
             <?php
+
             if (isset($bill) && (is_array($bill))) {
                 extract($bill);
-                $pttt = get_pttt($bill['bill_status']);
-
             }
+            $pttt = get_pttt($bill['bill_status']);
+
             ?>
         </div>
 
@@ -87,7 +85,7 @@
             </div>
         </div>
         <div class="row_main mb">
-            <a href="index.php?act=mybill"><input type="submit" value="Xem Đơn Hàng"></a>
+            <a href="index.php?page=1"><input type="submit" value="Về trang chủ"></a>
         </div>
     </div>
 

@@ -14,10 +14,13 @@
                         <th>Thành Tiền</th>
                         <th>Thao tác</th>
                     </tr>
+                    <?php if (isset($_SESSION['mycart'])): ?>
 
-                    <?php
-                    viewcart();
-                    ?>
+                        <?php
+                        viewcart();
+                        ?>
+                    <?php endif; ?>
+
 
 
                 </table>

@@ -73,7 +73,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                 echo '
                     <div class="card ' . $mr . '">
                         <div class="row_main img">
-                            <a href="' . $linksp . '">
+                            <a href="' . $linksp . '" name="showsp">
                             <img src="' . $hinh . '" class="card-img-top" alt="IMG" >
                             </a>                            
                         </div>

@@ -289,6 +289,10 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
 
         case 'addtocart':
+            if (!isset($_SESSION['mycart'])) {
+                $_SESSION['mycart'] = [];
+            }
+            // Kiểm tra người dùng có bấm vào nút thêm giỏ hàng hay chưa
             if ((isset($_POST['addtocart']) && $_POST['addtocart'])) {
                 $id = $_POST['id'];
                 $name = $_POST['name'];
@@ -296,10 +300,42 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $price = $_POST['price'];
                 $soluong = 1;
                 $thanhtien = $price * $soluong;
-                $spadd = [$id, $name, $img, $price, $soluong, $thanhtien];
-                array_push($_SESSION['mycart'], $spadd);
 
+
+                $product = [
+                    "id" => $id,
+                    "name" => $name,
+                    "img" => $img,
+                    "price" => $price,
+                    "soluong" => $soluong,
+                    "thanhtien" => $thanhtien
+
+                ];
+
+                // Biến nếu không tìm tháy cho = false còn có = true
+                $found = false;
+
+                // Kiểm tra xem có tồn tại $_SESSION['cart'] không
+                if (isset($_SESSION['mycart'])) {
+                    foreach ($_SESSION['mycart'] as $productID) {
+
+                        // Kiểm tra thằng id có  = với $productID không 
+                        if ($id == $productID['id']) {
+                            // Trong $_SESSION['cart'] láy mảng là id mấy và láy số lượng của nó
+                            $_SESSION['mycart']["$id"]['soluong']++;
+                            $found = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!$found) {
+                    $_SESSION['mycart']["$id"] = $product;
+                }
+
+                // header('Location: index.php?act=addtocart');
             }
+
 
             include 'view/pages/cart/viewcart.php';
 
@@ -325,6 +361,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 } else {
                     $id = 0;
                 }
+
                 $name = $_POST['name'];
                 $email = $_POST['email'];
                 $address = $_POST['address'];
@@ -334,23 +371,33 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $tongdonhang = tongdonhang();
                 //Tạo bill
                 $idbill = insert_bill($iduser, $name, $email, $address, $tel, $pttt, $ngaydathang, $tongdonhang);
-                //insert into cart với &_SESSiON['mycart'] với $idbill
+                //insert into cart với &_SESSiON['cart'] với $idbill
 
                 foreach ($_SESSION['mycart'] as $cart) {
-                    insert_cart($_SESSION['user']['id'], $cart[0], $cart[2], $cart[1], $cart[3], $cart[4], $cart[5], $idbill);
+                    insert_cart($_SESSION['user']['id'], $cart['id'], $cart['img'], $cart['name'], $cart['price'], $cart['soluong'], $cart['thanhtien'], $idbill);
                 }
                 // Xóa session cart
                 $_SESSION['cart'] = [];
 
                 $bill = loadone_bill($idbill);
                 $billct = loadall_cart($idbill);
-                include 'view/pages/cart/billconfirm.php';
             }
+            include 'view/pages/cart/billconfirm.php';
+
             break;
 
         case 'mybill':
             $listbill = loadall_bill($keyw = "", $iduser = 0);
             include 'view/pages/cart/mybill.php';
+            break;
+
+        case 'billct':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $bill = loadone_bill($id);
+                $billct = loadall_cart($id);
+            }
+            include 'view/pages/cart/billct.php';
             break;
         //Kết thúc phần giỏ hàng / thanh toán
 

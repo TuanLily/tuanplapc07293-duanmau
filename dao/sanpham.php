@@ -125,6 +125,16 @@ function getProduct_limit($start, $limit)
     return $listsanpham;
 }
 
+function update_luotxem($id)
+{
+    $one_sp = loadone_sanpham($id);
 
+
+    if (isset($one_sp)) {
+        $luotxem = $one_sp['luotxem'] + 1;
+        $sql = "update sanpham set luotxem = '" . $luotxem . "' where id = '" . $id . "'";
+    }
+    pdo_execute($sql);
+}
 
 ?>
