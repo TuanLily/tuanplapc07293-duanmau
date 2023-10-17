@@ -305,7 +305,7 @@ if (isset($_GET['act'])) {
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_bill($_GET['id']);
             }
-            $listbill = loadall_bill($keyw, 0);
+            $listbill = loadall_bill($keyw = "", 0);
             include "bill/list.php";
             break;
 
@@ -318,10 +318,6 @@ if (isset($_GET['act'])) {
             $listbill = loadall_bill();
             include "bill/list.php";
             break;
-
-        // case 'billct':
-        //     include "bill/billct.php";
-        //     break;
 
         //Kết thúc phần đơn hàng
 

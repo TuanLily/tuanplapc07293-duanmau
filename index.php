@@ -385,7 +385,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
 
         case 'mybill':
-            $listbill = loadall_bill($keyw = "", $iduser = 0);
+            // $listbill = loadall_bill($keyw = "", $iduser = 0);
+            $listbill = loadall_bill($keyw = "", $_SESSION['user']['id']);
             include 'view/pages/cart/mybill.php';
             break;
 

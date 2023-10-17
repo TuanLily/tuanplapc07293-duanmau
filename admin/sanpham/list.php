@@ -75,12 +75,12 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                     <td> <input type="checkbox" class="checkbox" name="check_del[]" value="' . $id . '"></td>
                     <td>' . $id . '</td>
                     <td>' . $name . '</td>
-                    <td style="width: auto; height: auto;">' . $hinhanh . '</td>
+                    <td style="width: 130px; height: 250px;">' . $hinhanh . '</td>
                     <td>$' . number_format($price, 0, ',', '.') . '</td>
                     <td>' . $luotxem . '</td>
                     <td>
                         <a href="' . $suasp . '"><input type="button" value="Sửa"></a>
-                        <a href="' . $xoasp . '" class="btn btn-danger">Xóa</a>
+                        <a href="' . $xoasp . '" onclick="return confirm(`Bạn có chắc muốn xóa không?`)" class="btn btn-danger">Xóa</a>
                     </td>
                     </tr>
                 ';

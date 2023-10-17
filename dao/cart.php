@@ -112,9 +112,9 @@ function bill_chi_tiet($listbill)
 
     }
     echo '
-            <tr>
+            <tr style="background-color:rgba(194, 255, 233);">
               <td colspan="5">Tổng đơn hàng</td>      
-              <td>$' . number_format($tong, 0, ",", ".") . '</td>
+              <td><strong>$' . number_format($tong, 0, ",", ".") . '</strong></td>
             </tr>
             ';
 }

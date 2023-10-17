@@ -41,7 +41,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                         <th>CHỨC NĂNG</th>
                     </tr>
                     <?php
-                    echo '<form onclick="return confirm("Bạn có chắc chắc xóa?")">';
+                    echo '<form>';
                     foreach ($listdanhmuc as $danhmuc) {
                         extract($danhmuc);
                         $suadm = "index.php?act=suadm&id=" . $id;
@@ -53,7 +53,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                         <td>' . $name . '</td>
                         <td>
                             <a href="' . $suadm . '"><input type="button" value="Sửa"></a>
-                            <a href="' . $xoadm . '" class="btn btn-danger">Xóa</a>
+                            <a href="' . $xoadm . '" onclick="return confirm(`Bạn có chắc muốn xóa không?`)" class="btn btn-danger">Xóa</a>
                             </td>
                     </tr>
                     ';

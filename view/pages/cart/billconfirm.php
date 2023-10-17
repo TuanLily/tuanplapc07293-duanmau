@@ -23,8 +23,8 @@
                 <li>Ngày đặt hàng:
                     <?= $bill['ngaydathang'] ?>
                 </li>
-                <li>Tổng đơn hàng: $
-                    <?= number_format($bill['total'], 0, ',', '.') ?>
+                <li>Tổng đơn hàng:
+                    <?= '$' . number_format($bill['total'], 0, ',', '.') ?>
                 </li>
                 <li>Phương thức thanh toán:
                     <?= $pttt ?>
