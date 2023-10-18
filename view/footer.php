@@ -1,5 +1,5 @@
 <div class="row_main mb footer">
-    X-shop - Copyright &copy 2023
+    © 2023. CÔNG TY CỔ PHẦN XÂY DỰNG VÀ ĐẦU TƯ THƯƠNG MẠI X-SHOP
 </div>
 </div>
 

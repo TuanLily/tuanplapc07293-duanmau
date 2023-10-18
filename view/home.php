@@ -21,6 +21,8 @@ $listsp_limit = getProduct_limit($start, $limit);
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $sanphamnew = $listsp_limit;
 }
+
+
 ?>
 
 
@@ -111,10 +113,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                         </a>
                     </li>
                     <?php for ($i = 1; $i <= $total_page; $i++): ?>
-                    <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
-                            href="index.php?page=<?= $i ?>">
-                            <?= $i ?>
-                        </a></li>
+                        <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
+                                href="index.php?page=<?= $i ?>">
+                                <?= $i ?>
+                            </a></li>
                     <?php endfor; ?>
                     <li class="page-item <?php echo (($cr_page == $total_page) ? 'check' : '') ?>">
                         <a class="page-link" href="index.php?page=<?= $cr_page + 1 ?>" aria-label="Next">

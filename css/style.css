@@ -17,6 +17,7 @@
 .container {
   width: 60%;
   margin: 0 auto;
+  background-color: #393636;
 }
 
 .row_main {
@@ -189,7 +190,7 @@
 }
 .img img {
   margin-top: 10px;
-  width: 80%;
+  width: 90%;
   height: 220px;
   transition: transform 0.5s; /* Animation */
 }
@@ -411,7 +412,7 @@
 #toggle_rpass,
 #toggle_pass_aside {
   position: absolute;
-  margin-top: -25px;
+  margin-top: -22px;
   right: 38%;
   height: 1.2vw;
   display: flex;
