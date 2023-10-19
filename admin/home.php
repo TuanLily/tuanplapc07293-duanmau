@@ -1,7 +1,7 @@
 <style>
 #myChart {
-    width: 1000px;
-    height: 800px;
+    width: 100%;
+    min-height: 800px;
     padding-top: 50px;
     margin-right: 200px;
 }

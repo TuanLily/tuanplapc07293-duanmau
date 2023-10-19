@@ -1,8 +1,17 @@
+<style>
+.box-title img {
+    width: 90px;
+    height: auto;
+    margin-bottom: 10px;
+}
+</style>
+
 <!-- Main Content  -->
 <div class="row_main mb ">
     <div class="box-left mr ">
         <div class="row_main mb">
-            <div class="box-title" style="text-align:center; background-color:aquamarine; color:red">
+            <div class="box-title" style="text-align:center; background-color:azure; color:red">
+                <img src="view/images/check1.gif" alt="">
                 <h2>QUÝ KHÁCH ĐÃ ĐẶT HÀNG THÀNH CÔNG!</h2>
             </div>
             <?php
