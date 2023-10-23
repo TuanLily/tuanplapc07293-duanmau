@@ -91,6 +91,7 @@ function bill()
 
 function bill_chi_tiet($listbill)
 {
+
     global $img_path;
     $tong = 0;
     $i = 0;

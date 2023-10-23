@@ -105,8 +105,9 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                     <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
                     <label for="checkAll" class="btn btn-warning bochon" style="display: none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
-                    <a href="index.php?act=delete_list_bl"><input type="submit" value="Xóa mục đã chọn"
-                            name="delete"></a>
+                    <a href="index.php?act=delete_list_bl"
+                        onclick="return confirm(`Bạn có chắc muốn xóa không?`)"><input type="submit"
+                            value="Xóa mục đã chọn" name="delete"></a>
                 </div>
             </div>
         </div>

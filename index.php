@@ -65,6 +65,25 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
             break;
 
+        case 'search':
+            if ((isset($_GET['keyw']) && $_GET['keyw'] != "")) {
+                $keyw = $_GET['keyw'];
+
+            } else {
+                $keyw = "";
+            }
+            if ((isset($_GET['iddm']) && $_GET['iddm'] > 0)) {
+                $iddm = $_GET['iddm'];
+
+            } else {
+                $iddm = 0;
+            }
+            $dssp = loadall_sanpham($keyw, $iddm);
+            $tendm = load_ten_danhmuc($iddm);
+            include 'view/pages/sanpham.php';
+
+            break;
+
         case 'dangky':
             if ((isset($_POST['dangky']) && $_POST['dangky'])) {
                 $email = $_POST['email'];

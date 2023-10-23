@@ -8,7 +8,7 @@
                     <tr>
                         <th>MÃ ĐƠN HÀNG</th>
                         <th>NGÀY ĐẶT</th>
-                        <th>SỐ LƯỢNG HÀNG</th>
+                        <th>SỐ MẶT HÀNG</th>
                         <th>TỔNG GIÁ TRỊ ĐƠN HÀNG</th>
                         <th>TRẠNG THÁI ĐƠN HÀNG</th>
                         <th>CHỨC NĂNG</th>
@@ -20,7 +20,7 @@
                             $ttdh = get_ttdh($bill['bill_status']);
                             $countsp = loadall_cart_count($bill['id']);
                             $billct = "index.php?act=billct&id=" . $bill['id'];
-                            echo '
+                            echo ' 
                                 <tr>
                                         <td>MDH-' . $bill['id'] . '</td>
                                         <td>' . $bill['ngaydathang'] . '</td>

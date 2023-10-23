@@ -32,9 +32,29 @@
                 Hình <br>
                 <input type="file" name="hinh" id="">
                 <div class="thongbao">
-                    <span>
-                        <?php echo (isset($_SESSION['error']['hinh'])) ? $_SESSION['error']['hinh'] : '' ?>
-                    </span>
+
+                    <?php
+
+                    if (isset($_SESSION['error']['hinh']) && $_SESSION['error']['hinh'] != "") {
+                        if (isset($_SESSION['error']['hinh']['required'])) {
+                            echo $_SESSION['error']['hinh']['required'];
+                            unset($_SESSION['error']['hinh']);
+                        }
+
+                        if (isset($_SESSION['error']['hinh']['incorrect'])) {
+                            echo $_SESSION['error']['hinh']['incorrect'];
+                            unset($_SESSION['error']['hinh']);
+                        }
+
+                        if (isset($_SESSION['error']['hinh']['maxSize'])) {
+                            echo $_SESSION['error']['hinh']['maxSize'];
+                            unset($_SESSION['error']['hinh']);
+                        }
+                    } else {
+                        unset($_SESSION['error']['hinh']);
+                    }
+                    ?>
+
                 </div>
             </div>
             <div class="row_main mb10">

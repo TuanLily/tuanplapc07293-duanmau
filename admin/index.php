@@ -1,4 +1,6 @@
 <?php
+session_start();
+ob_start();
 require_once "../dao/pdo.php";
 
 include "../dao/connect.php";
@@ -93,21 +95,26 @@ if (isset($_GET['act'])) {
                 $hinh = $_FILES['hinh']['name'];
                 $target_dir = "../upload/";
                 $target_file = $target_dir . basename($hinh);
+                $max_size = 1048576;
                 $uploadOk = 1;
-                // if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
-                // }
+
 
                 // Kiểm tra các giá trị trống
                 if ($tensp == "") {
                     $_SESSION['error']['tensp'] = 'Không được để trống';
                     $uploadOk = 0;
+                } else {
+                    unset($_SESSION['error']['tensp']);
                 }
                 if ($giasp == "" || $giasp < 0) {
                     $_SESSION['error']['giasp'] = 'Không được để trống hoặc giá trị âm';
                     $uploadOk = 0;
+                } else {
+                    unset($_SESSION['error']['giasp']);
                 }
-                if (empty($target_file)) {
-                    $_SESSION['error']['hinh'] = 'File không được để trống';
+
+                if (empty($hinh)) {
+                    $_SESSION['error']['hinh']['required'] = 'Ảnh không được trống';
                     $uploadOk = 0;
                 }
 
@@ -117,15 +124,16 @@ if (isset($_GET['act'])) {
                     $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                     && $imageFileType != "gif" && $imageFileType != "dng" && $imageFileType != "webp"
                 ) {
-                    $_SESSION['error']['hinh'] = 'Định dạng ảnh không phù hợp';
+                    $_SESSION['error']['hinh']['incorrect'] = 'Định dạng ảnh không phù hợp';
                     $uploadOk = 0;
                 }
 
                 // Kiểm tra dung lượng file
-                if ($_FILES["hinh"]["size"] > 5000000) { // kiểm tra 5MB = 5000000 Bytes
-                    $_SESSION['error']['hinh'] = 'Hình không vượt quá 5MB';
+                if ($_FILES['hinh']['size'] > $max_size) { // kiểm tra 1MB = 1048576 Bytes
+                    $_SESSION['error']['hinh']['maxSize'] = 'Hình không vượt quá 1MB';
                     $uploadOk = 0;
                 }
+
 
                 if ($uploadOk == 1) {
                     if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {

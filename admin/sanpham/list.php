@@ -108,10 +108,10 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                             </a>
                         </li>
                         <?php for ($i = 1; $i <= $total_page; $i++): ?>
-                            <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
-                                    href="index.php?act=listsp&page=<?= $i ?>">
-                                    <?= $i ?>
-                                </a></li>
+                        <li class="page-item <?php echo (($cr_page == $i) ? 'active' : '') ?>"><a class="page-link"
+                                href="index.php?act=listsp&page=<?= $i ?>">
+                                <?= $i ?>
+                            </a></li>
                         <?php endfor; ?>
                         <li class="page-item <?php echo (($cr_page == $total_page) ? 'check' : '') ?>">
                             <a class="page-link" href="index.php?act=listsp&page=<?= $cr_page + 1 ?>" aria-label="Next">
@@ -127,8 +127,9 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
                     <label for="checkAll" class="btn btn-secondary chon">Chọn tất cả</label>
                     <label for="checkAll" class="btn btn-warning bochon" style="display: none;">Bỏ chọn</label>
                     <input type="checkbox" hidden id="checkAll">
-                    <a href="index.php?act=delete_list_sp"><input type="submit" value="Xóa mục đã chọn"
-                            name="delete"></a>
+                    <a href="index.php?act=delete_list_sp"
+                        onclick="return confirm(`Bạn có chắc muốn xóa không?`)"><input type="submit"
+                            value="Xóa mục đã chọn" name="delete"></a>
                     <a href="index.php?act=addsp"><input type="button" value="Nhập thêm"></a>
                 </div>
 
